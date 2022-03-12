@@ -7,7 +7,7 @@
     "prepare": "node overrides/setup.js",
     "build": "spec-md ./src/index.md > ./docs/index.html",
     "start": "nodemon --exec \"./node_modules/.bin/spec-md > docs/index.html\" ./src/index.md",
-    "prettier": "prettier --write src overrides"
+    "prettier": "prettier --write src overrides .github"
   },
   "keywords": [],
   "author": "",
