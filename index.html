@@ -18,7 +18,7 @@
 <nav class="spec-toc">
 <div class="title">Contents</div>
 <ol>
-<li><a href="#sec-Prerequesites"><span class="spec-secid">1</span>Prerequesites</a><ol>
+<li><a href="#sec-Prerequisites"><span class="spec-secid">1</span>Prerequisites</a><ol>
 <li><a href="#sec-JSON-base-types"><span class="spec-secid">1.1</span>JSON base types</a></li>
 <li><a href="#sec-YAML-Base-Types"><span class="spec-secid">1.2</span>YAML Base Types</a></li>
 <li><a href="#sec-Transpiler"><span class="spec-secid">1.3</span>Transpiler</a></li>
@@ -46,8 +46,8 @@
 </ol>
 </nav>
 </header>
-<section id="sec-Prerequesites" secid="1">
-<h1><span class="spec-secid" title="link to this section"><a href="#sec-Prerequesites">1</a></span>Prerequesites</h1>
+<section id="sec-Prerequisites" secid="1">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Prerequisites">1</a></span>Prerequisites</h1>
 <p>Please refer to the Specification for more information</p>
 <section id="sec-JSON-base-types" secid="1.1">
 <h2><span class="spec-secid" title="link to this section"><a href="#sec-JSON-base-types">1.1</a></span>JSON base types</h2>
@@ -56,7 +56,7 @@
 <p>A <dfn id="boolean"><a href="#boolean" data-name="boolean">boolean</a></dfn> is a value that can either be <span class="spec-keyword">true</span> or <span class="spec-keyword">false</span>.</p>
 <p>A <dfn id="number"><a href="#number" data-name="number">number</a></dfn> is a value representing a numeric value.</p>
 <p><dfn id="null"><a href="#null" data-name="null">null</a></dfn> is a value representing the explicit absence of a value.</p>
-<p>An <dfn id="object"><a href="#object" data-name="object">object</a></dfn> is a value that maps a <span class="spec-ref"><a href="#string" data-name="string">string</a></span>-based key to a <span class="spec-ref"><a href="#value" data-name="value">value</a></span> for any number of unique keys.</p>
+<p>An <dfn id="object"><a href="#object" data-name="object">object</a></dfn> is a value that maps a <span class="spec-ref"><a href="#string" data-name="string">string</a></span>-based key to a <span class="spec-ref"><a href="#value" data-name="value">value</a></span> for any unique keys.</p>
 <p>An <dfn id="array"><a href="#array" data-name="array">array</a></dfn> is a value that contains a list where each item is a <span class="spec-ref"><a href="#value" data-name="value">value</a></span>.</p>
 <p>A <dfn id="value"><a href="#value" data-name="value">value</a></dfn> is either a <span class="spec-ref"><a href="#string" data-name="string">string</a></span>, a <span class="spec-ref"><a href="#boolean" data-name="boolean">boolean</a></span>, a <span class="spec-ref"><a href="#number" data-name="number">number</a></span>, <span class="spec-ref"><a href="#null" data-name="null">null</a></span>, an <span class="spec-ref"><a href="#object" data-name="object">object</a></span> or an <span class="spec-ref"><a href="#array" data-name="array">array</a></span>.</p>
 </section>
@@ -95,7 +95,7 @@
 <section id="sec-Target-language" secid="1.4">
 <h2><span class="spec-secid" title="link to this section"><a href="#sec-Target-language">1.4</a></span>Target language</h2>
 <p>A <dfn id="target-language"><a href="#target-language" data-name="target-language">target language</a></dfn> is a programming language for which you generate code representing the types defined with the DSL defined in this document.</p>
-<p>Every Telestion project can have an arbitrary number of <span class="spec-ref"><a href="#target-language" data-name="target-language">target language</a></span>s.</p>
+<p>Every Telestion project can have one or more <span class="spec-ref"><a href="#target-language" data-name="target-language">target language</a></span>s.</p>
 <div id="note-e0e39" class="spec-note">
 <a href="#note-e0e39">Note</a>
 The most common <span class="spec-ref"><a href="#target-language" data-name="target-language">target language</a></span>s for Telestion projects are Java and TypeScript.</div>
@@ -119,7 +119,7 @@ The most common <span class="spec-ref"><a href="#target-language" data-name="tar
 <section id="sec-Interfaces" secid="2.3">
 <h2><span class="spec-secid" title="link to this section"><a href="#sec-Interfaces">2.3</a></span>Interfaces</h2>
 <p>An <dfn id="interface"><a href="#interface" data-name="interface">Interface</a></dfn> is a specification of an <span class="spec-ref"><a href="#object" data-name="object">object</a></span>&lsquo;s structure.</p>
-<p>Every <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span> has an <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span>, a number of <span class="spec-ref"><a href="#interface-properties" data-name="interface-properties">Interface properties</a></span>, and optionally a set of <span class="spec-ref"><a href="#interface-modifiers" data-name="interface-modifiers">Interface modifiers</a></span>.</p>
+<p>Every <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span> has an <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span>, <span class="spec-ref"><a href="#interface-properties" data-name="interface-properties">Interface properties</a></span>, and optionally a set of <span class="spec-ref"><a href="#interface-modifiers" data-name="interface-modifiers">Interface modifiers</a></span>.</p>
 <pre id="example-49ba0" class="spec-example" data-language="yaml"><a href="#example-49ba0">Example № 1</a><code><span class="token key atrule">interfaces</span><span class="token punctuation">:</span>
   <span class="token key atrule">BaseMessage</span><span class="token punctuation">:</span>
     <span class="token key atrule">type</span><span class="token punctuation">:</span> string
@@ -157,11 +157,11 @@ The most common <span class="spec-ref"><a href="#target-language" data-name="tar
 </div>
 <section id="sec-Interface-modifiers" secid="2.3.1">
 <h3><span class="spec-secid" title="link to this section"><a href="#sec-Interface-modifiers">2.3.1</a></span>Interface modifiers</h3>
-<p><dfn id="interface-modifiers"><a href="#interface-modifiers" data-name="interface-modifiers">Interface modifiers</a></dfn> are essentially statements modifying how the <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span>&lsquo;s definition should be intrepreted.</p>
-<p><span class="spec-ref"><a href="#interface-modifiers" data-name="interface-modifiers">Interface modifiers</a></span> allow to modify interfaces by</p>
+<p><dfn id="interface-modifiers"><a href="#interface-modifiers" data-name="interface-modifiers">Interface modifiers</a></dfn> are essentially statements modifying how the <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span>&lsquo;s definition should be interpreted.</p>
+<p><span class="spec-ref"><a href="#interface-modifiers" data-name="interface-modifiers">Interface modifiers</a></span> allow modifying interfaces by</p>
 <ul>
 <li>making them <em>abstract</em> (disallowing creation of instances of the <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span>)</li>
-<li>adding a description to the interface</li>
+<li>adding a description to the <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span></li>
 <li>extending another <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span> and inheriting its <span class="spec-ref"><a href="#interface-properties" data-name="interface-properties">Interface properties</a></span></li>
 </ul>
 <pre id="example-9df4a" class="spec-example" data-language="yaml"><a href="#example-9df4a">Example № 2</a><code><span class="token key atrule">interfaces</span><span class="token punctuation">:</span>
@@ -180,7 +180,7 @@ The most common <span class="spec-ref"><a href="#target-language" data-name="tar
 <ol>
 <li>Let the <span class="spec-nt"><a href="#BooleanValue" data-name="BooleanValue">BooleanValue</a></span> represent whether the current interface is abstract (default: false)</li>
 <li>If the <span class="spec-nt"><a href="#BooleanValue" data-name="BooleanValue">BooleanValue</a></span> is <span class="spec-keyword">true</span><ol>
-<li>forbid creation of an <span class="spec-ref"><a href="#object" data-name="object">object</a></span> of this <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span>&lsquo;s type, if possible within the <span class="spec-ref"><a href="#target-language" data-name="target-language">target language</a></span></li>
+<li>forbid creating an <span class="spec-ref"><a href="#object" data-name="object">object</a></span> of this <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span>&lsquo;s type, if possible within the <span class="spec-ref"><a href="#target-language" data-name="target-language">target language</a></span></li>
 <li>forbid using this <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span>&lsquo;s <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span> in the <span class="spec-nt"><a href="#MessagesSpecification" data-name="MessagesSpecification">MessagesSpecification</a></span></li>
 </ol>
 </li>
@@ -260,10 +260,10 @@ The most common <span class="spec-ref"><a href="#target-language" data-name="tar
 <section id="sec-Message-types" secid="2.4">
 <h2><span class="spec-secid" title="link to this section"><a href="#sec-Message-types">2.4</a></span>Message types</h2>
 <div class="spec-semantic" id="MessagesSpecification">
-<span class="spec-nt"><a href="#MessagesSpecification" data-name="MessagesSpecification">MessagesSpecification</a></span><div class="spec-rhs"><span class="spec-t">messages:</span><span class="spec-prose">an array consiting of</span><span class="spec-quantified"><span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span><span class="spec-quantifiers"><span class="spec-quantifier list">list</span></span></span></div>
+<span class="spec-nt"><a href="#MessagesSpecification" data-name="MessagesSpecification">MessagesSpecification</a></span><div class="spec-rhs"><span class="spec-t">messages:</span><span class="spec-prose">an array of</span><span class="spec-quantified"><span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span><span class="spec-quantifiers"><span class="spec-quantifier list">list</span></span></span></div>
 <ol>
 <li>Let <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span> be a property of the <span class="spec-nt"><a href="#InterfaceSpecifications" data-name="InterfaceSpecifications">InterfaceSpecifications</a></span> object with an <span class="spec-ref"><a href="#array" data-name="array">array</a></span> value.</li>
-<li>If <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span> isn&rsquo;t specified in any <span class="spec-nt"><a href="#InterfaceSpecifications" data-name="InterfaceSpecifications">InterfaceSpecifications</a></span> in the type folder<ol>
+<li>If <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span> isn&rsquo;t specified in any <span class="spec-nt"><a href="#InterfaceSpecifications" data-name="InterfaceSpecifications">InterfaceSpecifications</a></span> in the <span class="spec-ref"><a href="#types-folder" data-name="types-folder">Types folder</a></span><ol>
 <li>abort compilation with an error</li>
 </ol>
 </li>
@@ -274,7 +274,7 @@ The most common <span class="spec-ref"><a href="#target-language" data-name="tar
 <section id="sec-Primitives" secid="2.5">
 <h2><span class="spec-secid" title="link to this section"><a href="#sec-Primitives">2.5</a></span>Primitives</h2>
 <p>A <dfn id="primitive"><a href="#primitive" data-name="primitive">Primitive</a></dfn> is a type that cannot be further specified within the DSL.</p>
-<p>A <span class="spec-ref"><a href="#primitive" data-name="primitive">Primitive</a></span> is clearly defined by a unique <span class="spec-nt"><a href="#PrimitiveName" data-name="PrimitiveName">PrimitiveName</a></span>.</p>
+<p>A <span class="spec-ref"><a href="#primitive" data-name="primitive">Primitive</a></span> is defined by a unique <span class="spec-nt"><a href="#PrimitiveName" data-name="PrimitiveName">PrimitiveName</a></span>.</p>
 <p>Any <span class="spec-ref"><a href="#primitive" data-name="primitive">Primitive</a></span> must get mapped to a type in every <span class="spec-ref"><a href="#target-language" data-name="target-language">target language</a></span> for which a <span class="spec-ref"><a href="#transpiler" data-name="transpiler">Transpiler</a></span> gets run.</p>
 <div id="note-03519" class="spec-note">
 <a href="#note-03519">Note</a>
@@ -500,7 +500,7 @@ Written in <a href="https://spec-md.com" target="_blank">Spec Markdown</a>.</foo
 <div class="spec-sidebar" aria-hidden>
 <div class="spec-toc">
 <div class="title"><a href="#">Telestion Message Type DSL Specification</a></div>
-<ol><li id="_sidebar_1"><a href="#sec-Prerequesites"><span class="spec-secid">1</span>Prerequesites</a>
+<ol><li id="_sidebar_1"><a href="#sec-Prerequisites"><span class="spec-secid">1</span>Prerequisites</a>
 <input hidden class="toggle" type="checkbox" id="_toggle_1" /><label for="_toggle_1"></label>
 <ol>
 <li id="_sidebar_1.1"><a href="#sec-JSON-base-types"><span class="spec-secid">1.1</span>JSON base types</a></li>
