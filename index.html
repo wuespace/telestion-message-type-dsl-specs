@@ -77,6 +77,16 @@
 <div class="spec-production" id="NumberValue">
 <span class="spec-nt"><a href="#NumberValue" data-name="NumberValue">NumberValue</a></span><div class="spec-rhs"><span class="spec-prose">any YAML syntax representing a number value</span></div>
 </div>
+<div class="spec-production" id="Value">
+<span class="spec-nt"><a href="#Value" data-name="Value">Value</a></span><div class="spec-oneof"><div class="spec-oneof-grid"><table>
+<tr>
+<td class="spec-rhs"><span class="spec-nt"><a href="#StringValue" data-name="StringValue">StringValue</a></span></td></tr>
+<tr>
+<td class="spec-rhs"><span class="spec-nt"><a href="#NumberValue" data-name="NumberValue">NumberValue</a></span></td></tr>
+<tr>
+<td class="spec-rhs"><span class="spec-nt"><a href="#BooleanValue" data-name="BooleanValue">BooleanValue</a></span></td></tr>
+</table></div></div>
+</div>
 </section>
 <section id="sec-Transpiler" secid="1.3">
 <h2><span class="spec-secid" title="link to this section"><a href="#sec-Transpiler">1.3</a></span>Transpiler</h2>
@@ -101,7 +111,7 @@ The most common <span class="spec-ref"><a href="#target-language" data-name="tar
 <h2><span class="spec-secid" title="link to this section"><a href="#sec-Type-File">2.2</a></span>Type File</h2>
 <p>A <dfn id="type-file"><a href="#type-file" data-name="type-file">Type File</a></dfn> is any file within the <span class="spec-ref"><a href="#types-folder" data-name="types-folder">Types folder</a></span> with the file extension <code>.types.yaml</code>. Its contents are defined by <span class="spec-nt"><a href="#TypeFileContent" data-name="TypeFileContent">TypeFileContent</a></span>.</p>
 <div class="spec-production" id="TypeFileContent">
-<span class="spec-nt"><a href="#TypeFileContent" data-name="TypeFileContent">TypeFileContent</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#InterfaceSpecifications" data-name="InterfaceSpecifications">InterfaceSpecifications</a></span><span class="spec-nt"><a href="#MessagesSpecification" data-name="MessagesSpecification">MessagesSpecification</a></span><span class="spec-quantified"><span class="spec-nt"><span data-name="PrimitiveSpecification">PrimitiveSpecification</span></span><span class="spec-quantifiers"><span class="spec-quantifier optional">opt</span></span></span></div>
+<span class="spec-nt"><a href="#TypeFileContent" data-name="TypeFileContent">TypeFileContent</a></span><div class="spec-rhs"><span class="spec-prose">an object containing of</span><span class="spec-nt"><a href="#InterfaceSpecifications" data-name="InterfaceSpecifications">InterfaceSpecifications</a></span><span class="spec-nt"><a href="#MessagesSpecification" data-name="MessagesSpecification">MessagesSpecification</a></span><span class="spec-quantified"><span class="spec-nt"><span data-name="PrimitiveSpecification">PrimitiveSpecification</span></span><span class="spec-quantifiers"><span class="spec-quantifier optional">opt</span></span></span></div>
 </div>
 <p><span class="spec-nt"><a href="#TypeFileContent" data-name="TypeFileContent">TypeFileContent</a></span> must be a valid YAML file.</p>
 </section>
@@ -118,7 +128,7 @@ The most common <span class="spec-ref"><a href="#target-language" data-name="tar
     <span class="token key atrule">numbers</span><span class="token punctuation">:</span> double<span class="token punctuation">[</span><span class="token punctuation">]</span>
 </code></pre>
 <div class="spec-semantic" id="InterfaceSpecifications">
-<span class="spec-nt"><a href="#InterfaceSpecifications" data-name="InterfaceSpecifications">InterfaceSpecifications</a></span><div class="spec-rhs"><span class="spec-t">interfaces:</span><span class="spec-quantified"><span class="spec-nt"><a href="#InterfaceSpecification" data-name="InterfaceSpecification">InterfaceSpecification</a></span><span class="spec-quantifiers"><span class="spec-quantifier list">list</span></span></span></div>
+<span class="spec-nt"><a href="#InterfaceSpecifications" data-name="InterfaceSpecifications">InterfaceSpecifications</a></span><div class="spec-rhs"><span class="spec-t">interfaces:</span><span class="spec-prose">an object consisting of</span><span class="spec-quantified"><span class="spec-nt"><a href="#InterfaceSpecification" data-name="InterfaceSpecification">InterfaceSpecification</a></span><span class="spec-quantifiers"><span class="spec-quantifier list">list</span></span></span></div>
 <ol>
 <li>Let <span class="spec-nt"><a href="#InterfaceSpecifications" data-name="InterfaceSpecifications">InterfaceSpecifications</a></span> be the <code>interfaces</code> property (an <span class="spec-ref"><a href="#object" data-name="object">object</a></span>) of the <span class="spec-ref"><a href="#type-file" data-name="type-file">Type File</a></span>&lsquo;s root <span class="spec-ref"><a href="#object" data-name="object">object</a></span>.</li>
 <li>Then <span class="spec-quantified"><span class="spec-nt"><a href="#InterfaceSpecification" data-name="InterfaceSpecification">InterfaceSpecification</a></span><span class="spec-quantifiers"><span class="spec-quantifier list">list</span></span></span> contains the definitions of the interfaces defined by the current <span class="spec-ref"><a href="#type-file" data-name="type-file">Type File</a></span>.</li>
@@ -144,7 +154,7 @@ Handling of duplicate interface names</div>
 </ol>
 </div>
 <div class="spec-production" id="InterfaceDetails">
-<span class="spec-nt"><a href="#InterfaceDetails" data-name="InterfaceDetails">InterfaceDetails</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#InterfaceModifiers" data-name="InterfaceModifiers">InterfaceModifiers</a></span><span class="spec-nt"><a href="#InterfaceProperties" data-name="InterfaceProperties">InterfaceProperties</a></span></div>
+<span class="spec-nt"><a href="#InterfaceDetails" data-name="InterfaceDetails">InterfaceDetails</a></span><div class="spec-rhs"><span class="spec-prose">an object consisting of</span><span class="spec-nt"><a href="#InterfaceModifiers" data-name="InterfaceModifiers">InterfaceModifiers</a></span><span class="spec-nt"><a href="#InterfaceProperties" data-name="InterfaceProperties">InterfaceProperties</a></span></div>
 </div>
 <section id="sec-Interface-modifiers" secid="2.3.1">
 <h3><span class="spec-secid" title="link to this section"><a href="#sec-Interface-modifiers">2.3.1</a></span>Interface modifiers</h3>
@@ -164,7 +174,7 @@ Handling of duplicate interface names</div>
     <span class="token key atrule">__description</span><span class="token punctuation">:</span> <span class="token string">"A nice little interface"</span>
 </code></pre>
 <div class="spec-production" id="InterfaceModifiers">
-<span class="spec-nt"><a href="#InterfaceModifiers" data-name="InterfaceModifiers">InterfaceModifiers</a></span><div class="spec-rhs"><span class="spec-quantified"><span class="spec-nt"><a href="#AbstractModifier" data-name="AbstractModifier">AbstractModifier</a></span><span class="spec-quantifiers"><span class="spec-quantifier optional">opt</span></span></span><span class="spec-quantified"><span class="spec-nt"><a href="#ExtendsModifier" data-name="ExtendsModifier">ExtendsModifier</a></span><span class="spec-quantifiers"><span class="spec-quantifier optional">opt</span></span></span><span class="spec-quantified"><span class="spec-nt"><a href="#DescriptionModifier" data-name="DescriptionModifier">DescriptionModifier</a></span><span class="spec-quantifiers"><span class="spec-quantifier optional">opt</span></span></span></div>
+<span class="spec-nt"><a href="#InterfaceModifiers" data-name="InterfaceModifiers">InterfaceModifiers</a></span><div class="spec-rhs"><span class="spec-prose">an object consisting of</span><span class="spec-quantified"><span class="spec-nt"><a href="#AbstractModifier" data-name="AbstractModifier">AbstractModifier</a></span><span class="spec-quantifiers"><span class="spec-quantifier optional">opt</span></span></span><span class="spec-quantified"><span class="spec-nt"><a href="#ExtendsModifier" data-name="ExtendsModifier">ExtendsModifier</a></span><span class="spec-quantifiers"><span class="spec-quantifier optional">opt</span></span></span><span class="spec-quantified"><span class="spec-nt"><a href="#DescriptionModifier" data-name="DescriptionModifier">DescriptionModifier</a></span><span class="spec-quantifiers"><span class="spec-quantifier optional">opt</span></span></span></div>
 </div>
 <div class="spec-semantic" id="AbstractModifier">
 <span class="spec-nt"><a href="#AbstractModifier" data-name="AbstractModifier">AbstractModifier</a></span><div class="spec-rhs"><span class="spec-t">__abstract: </span><span class="spec-nt"><a href="#BooleanValue" data-name="BooleanValue">BooleanValue</a></span></div>
@@ -189,15 +199,32 @@ Handling of duplicate interface names</div>
 <li>it contains all <span class="spec-ref"><a href="#interface-properties" data-name="interface-properties">Interface properties</a></span> from the <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span> with the provided <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span></li>
 <li>it contains all <span class="spec-ref"><a href="#interface-properties" data-name="interface-properties">Interface properties</a></span> declared by the current <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span></li>
 <li>for any <span class="spec-ref"><a href="#interface-properties" data-name="interface-properties">Interface properties</a></span> with the same <span class="spec-nt"><a href="#PropertyName" data-name="PropertyName">PropertyName</a></span>, the strictest type gets used.</li>
+<li>the current <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span> <em>extends</em> the <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span> with the passed <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span>.</li>
 </ol>
 </li>
 </ol>
 </div>
+<p>For example, the following <span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span>s would be compatible and thus, the <code>OtherType</code> <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span> <em>extends</em> the <code>BaseType</code> <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span>.</p>
+<pre id="example-0bff0" class="spec-example" data-language="yaml"><a href="#example-0bff0">Example № 3</a><code><span class="token key atrule">interfaces</span><span class="token punctuation">:</span>
+  <span class="token key atrule">BaseType</span><span class="token punctuation">:</span>
+    <span class="token key atrule">prop</span><span class="token punctuation">:</span> string <span class="token punctuation">|</span> number
+  <span class="token key atrule">OtherType</span><span class="token punctuation">:</span>
+    <span class="token key atrule">__extends</span><span class="token punctuation">:</span> BaseType
+    <span class="token key atrule">prop</span><span class="token punctuation">:</span> number
+</code></pre>
+<p>In the next example, however, the <span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span> <code>boolean</code> is incompatible to the <span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span> <code>string | number</code> in <code>BaseType</code>, so the <span class="spec-ref"><a href="#transpiler" data-name="transpiler">Transpiler</a></span> should abort with an error:</p>
+<pre id="example-d2e15" class="spec-counter-example" data-language="yaml"><a href="#example-d2e15">Counter Example № 4</a><code><span class="token key atrule">interfaces</span><span class="token punctuation">:</span>
+  <span class="token key atrule">BaseType</span><span class="token punctuation">:</span>
+    <span class="token key atrule">prop</span><span class="token punctuation">:</span> string <span class="token punctuation">|</span> number
+  <span class="token key atrule">OtherType</span><span class="token punctuation">:</span>
+    <span class="token key atrule">__extends</span><span class="token punctuation">:</span> BaseType
+    <span class="token key atrule">prop</span><span class="token punctuation">:</span> boolean <span class="token comment"># incompatible with "string | number"</span>
+</code></pre>
 <div class="spec-semantic" id="DescriptionModifier">
 <span class="spec-nt"><a href="#DescriptionModifier" data-name="DescriptionModifier">DescriptionModifier</a></span><div class="spec-rhs"><span class="spec-t">__description: </span><span class="spec-nt"><a href="#StringValue" data-name="StringValue">StringValue</a></span></div>
 <ol>
 <li>Let <span class="spec-nt"><a href="#StringValue" data-name="StringValue">StringValue</a></span> be any <span class="spec-ref"><a href="#string" data-name="string">string</a></span></li>
-<li>Then <span class="spec-nt"><a href="#StringValue" data-name="StringValue">StringValue</a></span> represents a text description of the current <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span></li>
+<li>Then <span class="spec-nt"><a href="#StringValue" data-name="StringValue">StringValue</a></span> represents a text description of the current <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span> authored in Markdown</li>
 </ol>
 </div>
 </section>
@@ -236,7 +263,7 @@ Handling of duplicate property names</div>
 <section id="sec-Message-types" secid="2.4">
 <h2><span class="spec-secid" title="link to this section"><a href="#sec-Message-types">2.4</a></span>Message types</h2>
 <div class="spec-semantic" id="MessagesSpecification">
-<span class="spec-nt"><a href="#MessagesSpecification" data-name="MessagesSpecification">MessagesSpecification</a></span><div class="spec-rhs"><span class="spec-quantified"><span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span><span class="spec-quantifiers"><span class="spec-quantifier list">list</span></span></span></div>
+<span class="spec-nt"><a href="#MessagesSpecification" data-name="MessagesSpecification">MessagesSpecification</a></span><div class="spec-rhs"><span class="spec-prose">an array consiting of</span><span class="spec-quantified"><span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span><span class="spec-quantifiers"><span class="spec-quantifier list">list</span></span></span></div>
 <ol>
 <li>Let <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span> be a property of the <span class="spec-nt"><a href="#InterfaceSpecifications" data-name="InterfaceSpecifications">InterfaceSpecifications</a></span> object with an <span class="spec-ref"><a href="#array" data-name="array">array</a></span> value.</li>
 <li>If <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span> isn&rsquo;t specified in any <span class="spec-nt"><a href="#InterfaceSpecifications" data-name="InterfaceSpecifications">InterfaceSpecifications</a></span> in the type folder<ol>
@@ -268,12 +295,15 @@ A <span class="spec-ref"><a href="#primitive" data-name="primitive">Primitive</a
 <section id="sec-Simple-type-specifier" secid="2.6.1">
 <h3><span class="spec-secid" title="link to this section"><a href="#sec-Simple-type-specifier">2.6.1</a></span>Simple type specifier</h3>
 <p>A <dfn id="simple-type-specifier"><a href="#simple-type-specifier" data-name="simple-type-specifier">Simple type specifier</a></dfn> is a representation of a <span class="spec-ref"><a href="#value" data-name="value">value</a></span>&lsquo;s type as a <span class="spec-ref"><a href="#string" data-name="string">string</a></span>.</p>
-<pre id="example-7ac9e" class="spec-example"><a href="#example-7ac9e">Example № 3</a><code>string[]
+<pre id="example-7ac9e" class="spec-example"><a href="#example-7ac9e">Example № 5</a><code>string[]
 (string | number)[]?
 (string[] | number | MyInterface?[])[]
 </code></pre>
 <div class="spec-production" id="SimpleTypeSpecifier">
-<span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span><div class="spec-oneof"><div class="spec-oneof-grid"><table>
+<span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#StringValue" data-name="StringValue">StringValue</a></span><span class="spec-prose">consisting of</span><span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span></div>
+</div>
+<div class="spec-production" id="SimpleTypeSpecifierNode">
+<span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span><div class="spec-oneof"><div class="spec-oneof-grid"><table>
 <tr>
 <td class="spec-rhs"><span class="spec-nt"><a href="#ParenthesizedTypeSpecifier" data-name="ParenthesizedTypeSpecifier">ParenthesizedTypeSpecifier</a></span></td></tr>
 <tr>
@@ -289,27 +319,27 @@ A <span class="spec-ref"><a href="#primitive" data-name="primitive">Primitive</a
 </table></div></div>
 </div>
 <div class="spec-semantic" id="ParenthesizedTypeSpecifier">
-<span class="spec-nt"><a href="#ParenthesizedTypeSpecifier" data-name="ParenthesizedTypeSpecifier">ParenthesizedTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-t">(</span><span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span><span class="spec-t">)</span></div>
+<span class="spec-nt"><a href="#ParenthesizedTypeSpecifier" data-name="ParenthesizedTypeSpecifier">ParenthesizedTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-t">(</span><span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span><span class="spec-t">)</span></div>
 <ol>
-<li>Then the resulting type is equivalent to the type specified by the <span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span></li>
+<li>Then the resulting type is equivalent to the type specified by the <span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span></li>
 </ol>
 </div>
 <div class="spec-semantic" id="ArrayTypeSpecifier">
-<span class="spec-nt"><a href="#ArrayTypeSpecifier" data-name="ArrayTypeSpecifier">ArrayTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span><span class="spec-t">[]</span></div>
+<span class="spec-nt"><a href="#ArrayTypeSpecifier" data-name="ArrayTypeSpecifier">ArrayTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span><span class="spec-t">[]</span></div>
 <ol>
-<li>Then the resulting type is an array whose values are of the type specified by the <span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span></li>
+<li>Then the resulting type is an array whose values are of the type specified by the <span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span></li>
 </ol>
 </div>
 <div class="spec-semantic" id="NullableTypeSpecifier">
-<span class="spec-nt"><a href="#NullableTypeSpecifier" data-name="NullableTypeSpecifier">NullableTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span><span class="spec-t">?</span></div>
+<span class="spec-nt"><a href="#NullableTypeSpecifier" data-name="NullableTypeSpecifier">NullableTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span><span class="spec-t">?</span></div>
 <ol>
-<li>Then the resulting type can be the type specified by the <span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span> or <span class="spec-ref"><a href="#null" data-name="null">null</a></span>.</li>
+<li>Then the resulting type can be the type specified by the <span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span> or <span class="spec-ref"><a href="#null" data-name="null">null</a></span>.</li>
 </ol>
 </div>
 <div class="spec-semantic" id="UnionTypeSpecifier">
-<span class="spec-nt"><a href="#UnionTypeSpecifier" data-name="UnionTypeSpecifier">UnionTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span><span class="spec-t">|</span><span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span></div>
+<span class="spec-nt"><a href="#UnionTypeSpecifier" data-name="UnionTypeSpecifier">UnionTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span><span class="spec-t">|</span><span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span></div>
 <ol>
-<li>Then the resulting type can be the type specified by either the first or the second <span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span>.</li>
+<li>Then the resulting type can be the type specified by either the first or the second <span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span>.</li>
 </ol>
 </div>
 <div class="spec-semantic" id="InterfaceTypeSpecifier">
@@ -332,13 +362,59 @@ A <span class="spec-ref"><a href="#primitive" data-name="primitive">Primitive</a
 <li>Then the resulting type is the target language&rsquo;s type defined by the <span class="spec-ref"><a href="#primitive" data-name="primitive">Primitive</a></span> with the given <span class="spec-nt"><span data-name="PrimitiveName">PrimitiveName</span></span>.</li>
 </ol>
 </div>
+<div id="note-133b5" class="spec-note">
+<a href="#note-133b5">Note</a>
+We evaluated using the GraphQL syntax for compatibility, but found it to be incompatible with YAML as a <span class="spec-ref"><a href="#value" data-name="value">value</a></span> starting with <span class="spec-t">[</span> for an <span class="spec-ref"><a href="#array" data-name="array">array</a></span> would have resulted in interpretation as an <span class="spec-ref"><a href="#array" data-name="array">array</a></span> instead of the required <span class="spec-nt"><a href="#StringValue" data-name="StringValue">StringValue</a></span>.</div>
 </section>
 <section id="sec-Complex-type-specifier" secid="2.6.2">
 <h3><span class="spec-secid" title="link to this section"><a href="#sec-Complex-type-specifier">2.6.2</a></span>Complex type specifier</h3>
-<p>A <dfn id="complex-type-specifier"><a href="#complex-type-specifier" data-name="complex-type-specifier">Complex type specifier</a></dfn> is an <span class="spec-ref"><a href="#object" data-name="object">object</a></span> representing a type that allows for specification of more details for that type than a <span class="spec-ref"><a href="#simple-type-specifier" data-name="simple-type-specifier">Simple type specifier</a></span>.</p>
-<div class="spec-production" id="ComplexTypeSpecifier">
-<span class="spec-nt"><a href="#ComplexTypeSpecifier" data-name="ComplexTypeSpecifier">ComplexTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-prose">an object-based specification of a value&rsquo;s type that allows for a few more options</span></div>
+<p>A <dfn id="complex-type-specifier"><a href="#complex-type-specifier" data-name="complex-type-specifier">Complex type specifier</a></dfn> is an <span class="spec-ref"><a href="#object" data-name="object">object</a></span> representing a type that allows for specifications for more details for that type than a <span class="spec-ref"><a href="#simple-type-specifier" data-name="simple-type-specifier">Simple type specifier</a></span>.</p>
+<div class="spec-semantic" id="ComplexTypeSpecifier">
+<span class="spec-nt"><a href="#ComplexTypeSpecifier" data-name="ComplexTypeSpecifier">ComplexTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-prose">an object consisting of</span><span class="spec-quantified"><span class="spec-nt"><a href="#ComplexTypeSpecifierType" data-name="ComplexTypeSpecifierType">ComplexTypeSpecifierType</a></span><span class="spec-quantifiers"><span class="spec-quantifier optional">opt</span></span></span><span class="spec-quantified"><span class="spec-nt"><a href="#ComplexTypeSpecifierValue" data-name="ComplexTypeSpecifierValue">ComplexTypeSpecifierValue</a></span><span class="spec-quantifiers"><span class="spec-quantifier optional">opt</span></span></span><span class="spec-quantified"><span class="spec-nt"><a href="#ComplexTypeSpecifierMinimumValue" data-name="ComplexTypeSpecifierMinimumValue">ComplexTypeSpecifierMinimumValue</a></span><span class="spec-quantifiers"><span class="spec-quantifier optional">opt</span></span></span><span class="spec-quantified"><span class="spec-nt"><a href="#ComplexTypeSpecifierMaximumValue" data-name="ComplexTypeSpecifierMaximumValue">ComplexTypeSpecifierMaximumValue</a></span><span class="spec-quantifiers"><span class="spec-quantifier optional">opt</span></span></span></div>
+<ol>
+<li>If no <span class="spec-quantified"><span class="spec-nt"><a href="#ComplexTypeSpecifierType" data-name="ComplexTypeSpecifierType">ComplexTypeSpecifierType</a></span><span class="spec-quantifiers"><span class="spec-quantifier optional">opt</span></span></span> (or <span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span>) exists for the current property in the current <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span> or any of the <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span>s that the current <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span> extends (directly or indirectly)<ol>
+<li>abort with an error</li>
+</ol>
+</li>
+</ol>
 </div>
+<div class="spec-production" id="ComplexTypeSpecifierType">
+<span class="spec-nt"><a href="#ComplexTypeSpecifierType" data-name="ComplexTypeSpecifierType">ComplexTypeSpecifierType</a></span><div class="spec-rhs"><span class="spec-t">type:</span><span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span></div>
+</div>
+<div class="spec-semantic" id="ComplexTypeSpecifierValue">
+<span class="spec-nt"><a href="#ComplexTypeSpecifierValue" data-name="ComplexTypeSpecifierValue">ComplexTypeSpecifierValue</a></span><div class="spec-rhs"><span class="spec-t">value:</span><span class="spec-prose">an array of</span><span class="spec-quantified"><span class="spec-nt"><a href="#Value" data-name="Value">Value</a></span><span class="spec-quantifiers"><span class="spec-quantifier list">list</span></span></span></div>
+<ol>
+<li>Then any <span class="spec-ref"><a href="#value" data-name="value">value</a></span> of the type represented by the <span class="spec-nt"><a href="#ComplexTypeSpecifier" data-name="ComplexTypeSpecifier">ComplexTypeSpecifier</a></span> must be equal to at least one <span class="spec-nt"><a href="#Value" data-name="Value">Value</a></span> from the <span class="spec-quantified"><span class="spec-nt"><a href="#Value" data-name="Value">Value</a></span><span class="spec-quantifiers"><span class="spec-quantifier list">list</span></span></span> <span class="spec-ref"><a href="#array" data-name="array">array</a></span></li>
+</ol>
+</div>
+<div class="spec-semantic" id="ComplexTypeSpecifierDescription">
+<span class="spec-nt"><a href="#ComplexTypeSpecifierDescription" data-name="ComplexTypeSpecifierDescription">ComplexTypeSpecifierDescription</a></span><div class="spec-rhs"><span class="spec-t">description:</span><span class="spec-nt"><a href="#StringValue" data-name="StringValue">StringValue</a></span></div>
+<ol>
+<li>Then the <span class="spec-nt"><a href="#StringValue" data-name="StringValue">StringValue</a></span> is a text description of the type represented by the <span class="spec-nt"><a href="#ComplexTypeSpecifier" data-name="ComplexTypeSpecifier">ComplexTypeSpecifier</a></span> authored in Markdown.</li>
+</ol>
+</div>
+<div class="spec-semantic" id="ComplexTypeSpecifierMinimumValue">
+<span class="spec-nt"><a href="#ComplexTypeSpecifierMinimumValue" data-name="ComplexTypeSpecifierMinimumValue">ComplexTypeSpecifierMinimumValue</a></span><div class="spec-rhs"><span class="spec-t">min:</span><span class="spec-nt"><a href="#NumberValue" data-name="NumberValue">NumberValue</a></span></div>
+<ol>
+<li>Then the <span class="spec-nt"><a href="#NumberValue" data-name="NumberValue">NumberValue</a></span> represents the minimum valid <span class="spec-ref"><a href="#value" data-name="value">value</a></span> of the type specified by the <span class="spec-nt"><a href="#ComplexTypeSpecifier" data-name="ComplexTypeSpecifier">ComplexTypeSpecifier</a></span>. </li>
+</ol>
+</div>
+<div class="spec-semantic" id="ComplexTypeSpecifierMaximumValue">
+<span class="spec-nt"><a href="#ComplexTypeSpecifierMaximumValue" data-name="ComplexTypeSpecifierMaximumValue">ComplexTypeSpecifierMaximumValue</a></span><div class="spec-rhs"><span class="spec-t">max:</span><span class="spec-nt"><a href="#NumberValue" data-name="NumberValue">NumberValue</a></span></div>
+<ol>
+<li>Then the <span class="spec-nt"><a href="#NumberValue" data-name="NumberValue">NumberValue</a></span> represents the maximum valid <span class="spec-ref"><a href="#value" data-name="value">value</a></span> of the type specified by the <span class="spec-nt"><a href="#ComplexTypeSpecifier" data-name="ComplexTypeSpecifier">ComplexTypeSpecifier</a></span>.</li>
+</ol>
+</div>
+<pre id="example-9fb62" class="spec-example" data-language="yaml"><a href="#example-9fb62">Example № 6</a><code><span class="token key atrule">interfaces</span><span class="token punctuation">:</span>
+  <span class="token key atrule">MyInterface</span><span class="token punctuation">:</span>
+    <span class="token key atrule">someProperty</span><span class="token punctuation">:</span>
+      <span class="token key atrule">type</span><span class="token punctuation">:</span> double
+      <span class="token key atrule">min</span><span class="token punctuation">:</span> <span class="token number">3</span>
+      <span class="token key atrule">description</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
+        This is a multiline description.</span>
+
+        I can use `Markdown` here.
+</code></pre>
 </section>
 </section>
 </section>
@@ -350,7 +426,7 @@ A <span class="spec-ref"><a href="#primitive" data-name="primitive">Primitive</a
 <li><a href="#boolean">boolean</a></li>
 <li><a href="#BooleanValue">BooleanValue</a></li>
 <li><a href="#complex-type-specifier">Complex type specifier</a></li>
-<li><a href="#ComplexTypeSpecifier">ComplexTypeSpecifier</a></li>
+<li><a href="#ComplexTypeSpecifierType">ComplexTypeSpecifierType</a></li>
 <li><a href="#interface">Interface</a></li>
 <li><a href="#interface-modifiers">Interface modifiers</a></li>
 <li><a href="#interface-properties">Interface properties</a></li>
@@ -364,6 +440,7 @@ A <span class="spec-ref"><a href="#primitive" data-name="primitive">Primitive</a
 <li><a href="#PropertyType">PropertyType</a></li>
 <li><a href="#simple-type-specifier">Simple type specifier</a></li>
 <li><a href="#SimpleTypeSpecifier">SimpleTypeSpecifier</a></li>
+<li><a href="#SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></li>
 <li><a href="#string">string</a></li>
 <li><a href="#StringValue">StringValue</a></li>
 <li><a href="#target-language">target language</a></li>
@@ -374,6 +451,7 @@ A <span class="spec-ref"><a href="#primitive" data-name="primitive">Primitive</a
 <li><a href="#types-folder">Types folder</a></li>
 <li><a href="#TypeSpecifier">TypeSpecifier</a></li>
 <li><a href="#value">value</a></li>
+<li><a href="#Value">Value</a></li>
 </ol>
 </section>
 </article>
