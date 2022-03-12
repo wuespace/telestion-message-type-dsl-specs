@@ -65,9 +65,11 @@ NOTE: The most common *target language*s for Telestion projects are Java and Typ
 
 :: A _Type File_ is any file within the _Types folder_ with the file extension `.types.yaml`. Its contents are defined by {TypeFileContent}.
 
-TypeFileContent: "an object containing of" InterfaceSpecifications MessagesSpecification PrimitiveSpecification?
+TypeFileContent: "an object containing" InterfaceSpecifications MessagesSpecification PrimitiveSpecification?
 
 {TypeFileContent} must be a valid YAML file.
+
+Any files fulfilling the _Type File_ specification should get merged in interpretation if they are compatible. For example, any _Interface_ defined in `a.types.yaml` should also be available in `b.types.yaml` as if it had been declared in `b.types.yaml`'s {InterfaceSpecifications}. The same holds true for {MessagesSpecification} and {PrimitiveSpecification}. If types cannot be merged, the _Transpiler_ should abort with an error.
 
 ### Interfaces
 
@@ -85,7 +87,7 @@ interfaces:
     numbers: double[]
 ```
 
-InterfaceSpecifications: `interfaces:` "an object consisting of" InterfaceSpecification+
+InterfaceSpecifications: `interfaces:` "an object containing" InterfaceSpecification+
 
 - Let {InterfaceSpecifications} be the `interfaces` property (an _object_) of the _Type File_'s root _object_.
 - Then {InterfaceSpecification+} contains the definitions of the interfaces defined by the current _Type File_.
@@ -103,7 +105,7 @@ InterfaceName: /^[A-Z][a-za-z0-9]+$/
 - If any {InterfaceName} doesn't match the specified pattern
   - show a warning. The pattern is supposed to enable maximum cross-language support.
 
-InterfaceDetails: "an object consisting of" InterfaceModifiers InterfaceProperties
+InterfaceDetails: "an object containing" InterfaceModifiers InterfaceProperties
 
 #### Interface modifiers
 
@@ -125,7 +127,7 @@ interfaces:
     __description: "A nice little interface"
 ```
 
-InterfaceModifiers: "an object consisting of" AbstractModifier? ExtendsModifier? DescriptionModifier?
+InterfaceModifiers: "an object containing" AbstractModifier? ExtendsModifier? DescriptionModifier?
 
 AbstractModifier: `__abstract: ` BooleanValue
 
@@ -274,7 +276,7 @@ NOTE: We evaluated using the GraphQL syntax for compatibility, but found it to b
 
 :: A _Complex type specifier_ is an _object_ representing a type that allows for specifications for more details for that type than a _Simple type specifier_.
 
-ComplexTypeSpecifier: "an object consisting of" ComplexTypeSpecifierType? ComplexTypeSpecifierValue? ComplexTypeSpecifierMinimumValue? ComplexTypeSpecifierMaximumValue?
+ComplexTypeSpecifier: "an object containing" ComplexTypeSpecifierType? ComplexTypeSpecifierValue? ComplexTypeSpecifierMinimumValue? ComplexTypeSpecifierMaximumValue?
 
 - If no {ComplexTypeSpecifierType?} (or {SimpleTypeSpecifier}) exists for the current property in the current _Interface_ or any _Interface_ that the current _Interface_ extends (directly or indirectly)
   - abort with an error
