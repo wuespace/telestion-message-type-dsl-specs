@@ -1,0 +1,1 @@
+- also enable linking to "Semantic" grammar blocks
