@@ -37,6 +37,12 @@ StringValue: "any YAML syntax representing a string value"
 
 NumberValue: "any YAML syntax representing a number value"
 
+Value: one of
+
+- StringValue
+- NumberValue
+- BooleanValue
+
 ### Transpiler
 
 :: A _transpiler_ generates code for a _target language_ from the DSL defined in this document.
@@ -59,7 +65,7 @@ NOTE: The most common *target language*s for Telestion projects are Java and Typ
 
 :: A _Type File_ is any file within the _Types folder_ with the file extension `.types.yaml`. Its contents are defined by {TypeFileContent}.
 
-TypeFileContent: InterfaceSpecifications MessagesSpecification PrimitiveSpecification?
+TypeFileContent: "an object containing of" InterfaceSpecifications MessagesSpecification PrimitiveSpecification?
 
 {TypeFileContent} must be a valid YAML file.
 
@@ -79,7 +85,7 @@ interfaces:
     numbers: double[]
 ```
 
-InterfaceSpecifications: `interfaces:` InterfaceSpecification+
+InterfaceSpecifications: `interfaces:` "an object consisting of" InterfaceSpecification+
 
 - Let {InterfaceSpecifications} be the `interfaces` property (an _object_) of the _Type File_'s root _object_.
 - Then {InterfaceSpecification+} contains the definitions of the interfaces defined by the current _Type File_.
@@ -97,7 +103,7 @@ InterfaceName: /^[A-Z][a-za-z0-9]+$/
 - If any {InterfaceName} doesn't match the specified pattern
   - show a warning. The pattern is supposed to enable maximum cross-language support.
 
-InterfaceDetails: InterfaceModifiers InterfaceProperties
+InterfaceDetails: "an object consisting of" InterfaceModifiers InterfaceProperties
 
 #### Interface modifiers
 
@@ -119,7 +125,7 @@ interfaces:
     __description: "A nice little interface"
 ```
 
-InterfaceModifiers: AbstractModifier? ExtendsModifier? DescriptionModifier?
+InterfaceModifiers: "an object consisting of" AbstractModifier? ExtendsModifier? DescriptionModifier?
 
 AbstractModifier: `__abstract: ` BooleanValue
 
@@ -137,11 +143,34 @@ ExtendsModifier: `__extends: ` InterfaceName
   - it contains all _Interface properties_ from the _Interface_ with the provided {InterfaceName}
   - it contains all _Interface properties_ declared by the current _Interface_
   - for any _Interface properties_ with the same {PropertyName}, the strictest type gets used.
+  - the current _Interface_ _extends_ the _Interface_ with the passed {InterfaceName}.
+
+For example, the following {SimpleTypeSpecifier}s would be compatible and thus, the `OtherType` _Interface_ _extends_ the `BaseType` _Interface_.
+
+```yaml example
+interfaces:
+  BaseType:
+    prop: string | number
+  OtherType:
+    __extends: BaseType
+    prop: number
+```
+
+In the next example, however, the {SimpleTypeSpecifier} `boolean` is incompatible to the {SimpleTypeSpecifier} `string | number` in `BaseType`, so the _Transpiler_ should abort with an error:
+
+```yaml counter-example
+interfaces:
+  BaseType:
+    prop: string | number
+  OtherType:
+    __extends: BaseType
+    prop: boolean # incompatible with "string | number"
+```
 
 DescriptionModifier: `__description: ` StringValue
 
 - Let {StringValue} be any _string_
-- Then {StringValue} represents a text description of the current _Interface_
+- Then {StringValue} represents a text description of the current _Interface_ authored in Markdown
 
 #### Interface properties
 
@@ -167,7 +196,7 @@ PropertyType: TypeSpecifier
 
 ### Message types
 
-MessagesSpecification: InterfaceName+
+MessagesSpecification: "an array consiting of" InterfaceName+
 
 - Let {InterfaceName} be a property of the {InterfaceSpecifications} object with an _array_ value.
 - If {InterfaceName} isn't specified in any {InterfaceSpecifications} in the type folder
@@ -200,7 +229,9 @@ string[]
 (string[] | number | MyInterface?[])[]
 ```
 
-SimpleTypeSpecifier: one of
+SimpleTypeSpecifier: StringValue "consisting of" SimpleTypeSpecifierNode
+
+SimpleTypeSpecifierNode: one of
 
 - ParenthesizedTypeSpecifier
 - ArrayTypeSpecifier
@@ -209,21 +240,21 @@ SimpleTypeSpecifier: one of
 - InterfaceTypeSpecifier
 - PrimitiveTypeSpecifier
 
-ParenthesizedTypeSpecifier: ( SimpleTypeSpecifier )
+ParenthesizedTypeSpecifier: ( SimpleTypeSpecifierNode )
 
-- Then the resulting type is equivalent to the type specified by the {SimpleTypeSpecifier}
+- Then the resulting type is equivalent to the type specified by the {SimpleTypeSpecifierNode}
 
-ArrayTypeSpecifier: SimpleTypeSpecifier `[]`
+ArrayTypeSpecifier: SimpleTypeSpecifierNode `[]`
 
-- Then the resulting type is an array whose values are of the type specified by the {SimpleTypeSpecifier}
+- Then the resulting type is an array whose values are of the type specified by the {SimpleTypeSpecifierNode}
 
-NullableTypeSpecifier: SimpleTypeSpecifier `?`
+NullableTypeSpecifier: SimpleTypeSpecifierNode `?`
 
-- Then the resulting type can be the type specified by the {SimpleTypeSpecifier} or _null_.
+- Then the resulting type can be the type specified by the {SimpleTypeSpecifierNode} or _null_.
 
-UnionTypeSpecifier: SimpleTypeSpecifier | SimpleTypeSpecifier
+UnionTypeSpecifier: SimpleTypeSpecifierNode | SimpleTypeSpecifierNode
 
-- Then the resulting type can be the type specified by either the first or the second {SimpleTypeSpecifier}.
+- Then the resulting type can be the type specified by either the first or the second {SimpleTypeSpecifierNode}.
 
 InterfaceTypeSpecifier: InterfaceName
 
@@ -237,8 +268,43 @@ PrimitiveTypeSpecifier: PrimitiveName
   - abort with an error.
 - Then the resulting type is the target language's type defined by the _Primitive_ with the given {PrimitiveName}.
 
+NOTE: We evaluated using the GraphQL syntax for compatibility, but found it to be incompatible with YAML as a _value_ starting with {`[`} for an _array_ would have resulted in interpretation as an _array_ instead of the required {StringValue}.
+
 #### Complex type specifier
 
-:: A _Complex type specifier_ is an _object_ representing a type that allows for specification of more details for that type than a _Simple type specifier_.
+:: A _Complex type specifier_ is an _object_ representing a type that allows for specifications for more details for that type than a _Simple type specifier_.
 
-ComplexTypeSpecifier: "an object-based specification of a value's type that allows for a few more options"
+ComplexTypeSpecifier: "an object consisting of" ComplexTypeSpecifierType? ComplexTypeSpecifierValue? ComplexTypeSpecifierMinimumValue? ComplexTypeSpecifierMaximumValue?
+
+- If no {ComplexTypeSpecifierType?} (or {SimpleTypeSpecifier}) exists for the current property in the current _Interface_ or any of the _Interface_s that the current _Interface_ extends (directly or indirectly)
+  - abort with an error
+
+ComplexTypeSpecifierType: `type:` SimpleTypeSpecifier
+
+ComplexTypeSpecifierValue: `value:` "an array of" Value+
+
+- Then any _value_ of the type represented by the {ComplexTypeSpecifier} must be equal to at least one {Value} from the {Value+} _array_
+
+ComplexTypeSpecifierDescription: `description:` StringValue
+
+- Then the {StringValue} is a text description of the type represented by the {ComplexTypeSpecifier} authored in Markdown.
+
+ComplexTypeSpecifierMinimumValue: `min:` NumberValue
+
+- Then the {NumberValue} represents the minimum valid *value* of the type specified by the {ComplexTypeSpecifier}. 
+
+ComplexTypeSpecifierMaximumValue: `max:` NumberValue
+
+- Then the {NumberValue} represents the maximum valid *value* of the type specified by the {ComplexTypeSpecifier}.
+
+```yaml example
+interfaces:
+  MyInterface:
+    someProperty:
+      type: double
+      min: 3
+      description: |
+        This is a multiline description.
+
+        I can use `Markdown` here.
+```
