@@ -98,8 +98,6 @@ InterfaceSpecification: InterfaceName `:` InterfaceDetails
 - Let {InterfaceName} be the key of the {InterfaceSpecifications} property
 - Let {InterfaceDetails} be the properties of an _object_.
 
-TODO Handling of duplicate interface names
-
 InterfaceName: /^[A-Z][a-za-z0-9]+$/
 
 - If any {InterfaceName} doesn't match the specified pattern
@@ -187,8 +185,6 @@ Property: PropertyName `:` PropertyType
 
 - Any _object_ of the _Interface_'s type must contain a property with the key {PropertyName} with a _value_ of the type {PropertyType}.
 
-TODO Handling of duplicate property names
-
 PropertyName: /^[a-z][a-z0-9]\*$/
 
 - If any {PropertyName} doesn't match the specified pattern
@@ -211,9 +207,42 @@ MessagesSpecification: `messages:` "an array consiting of" InterfaceName+
 
 A _Primitive_ is clearly defined by a unique {PrimitiveName}.
 
-Any _Primitive_ must get mapped to a type in every _target language_.
+Any _Primitive_ must get mapped to a type in every _target language_ for which a _Transpiler_ gets run.
 
 NOTE: A _Primitive_ within the DSL needn't necessarily be a "primitive" in a _target language_. For example, you can define a `date` primitive that can get mapped to a `DateTime` instance in Java. In this case, you couldn't define how a `date` gets represented any better within the DSL (making it a _Primitive_), but it wouldn't be a "primitive" value in Java.
+
+PrimitiveSpecification: `primitives:` "an object containing" Primitive+
+
+Primitive: PrimitiveName `:` "an object containing" PrimitiveLanguageMapEntry+
+
+PrimitiveName: /^[a-z][a-z_0-9]\*$/
+
+- Then the _Primitive_ {PrimitiveName} is defined by its {PrimitiveLanguageMapEntry+}.
+
+PrimitiveLanguageMapEntry: TargetLanguageName `:` StringValue
+
+- Let {TargetLanguageName} be an identifier of a _Target language_.
+- Then {StringValue} contains the current {Primitive}'s type in that _Target language_. It is up to the _Transpiler_ to interpret that value and specify what it needs.
+
+TargetLanguageName: /^[a-z][a-za-z0-9]\*$/
+
+NOTE: While this specification doesn't define any required _Target language_ (this depends on the individual project and the _Transpiler_ it uses), the most commonly used {TargetLanguageName} values are `java`, `json`, and `typescript`.
+
+```yaml example
+primitives:
+  double:
+    java: double
+    json: number
+    typescript: number
+  string:
+    java: String
+    json: string
+    typescript: string
+  json:
+    java: com.fasterxml.jackson.databind.JsonNode
+    json: '["number","string","boolean","object","array", "null"]'
+    typescript: any
+```
 
 ### Type specifiers
 
