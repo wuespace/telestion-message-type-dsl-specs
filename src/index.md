@@ -196,7 +196,7 @@ PropertyType: TypeSpecifier
 
 ### Message types
 
-MessagesSpecification: "an array consiting of" InterfaceName+
+MessagesSpecification: `messages:` "an array consiting of" InterfaceName+
 
 - Let {InterfaceName} be a property of the {InterfaceSpecifications} object with an _array_ value.
 - If {InterfaceName} isn't specified in any {InterfaceSpecifications} in the type folder
