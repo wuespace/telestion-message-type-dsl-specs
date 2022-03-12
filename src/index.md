@@ -2,7 +2,7 @@
 
 This document specifies the YAML-based Domain-specific language (DSL) for the specification of JSON message types within the Telestion ecosystem.
 
-## Prerequesites
+## Prerequisites
 
 Please refer to the Specification for more information
 
@@ -18,7 +18,7 @@ For this documentation, we use the following base types / terminology:
 
 :: _null_ is a value representing the explicit absence of a value.
 
-:: An _object_ is a value that maps a _string_-based key to a _value_ for any number of unique keys.
+:: An _object_ is a value that maps a _string_-based key to a _value_ for any unique keys.
 
 :: An _array_ is a value that contains a list where each item is a _value_.
 
@@ -51,7 +51,7 @@ Value: one of
 
 :: A _target language_ is a programming language for which you generate code representing the types defined with the DSL defined in this document.
 
-Every Telestion project can have an arbitrary number of *target language*s.
+Every Telestion project can have one or more *target language*s.
 
 NOTE: The most common *target language*s for Telestion projects are Java and TypeScript.
 
@@ -75,7 +75,7 @@ Any files fulfilling the _Type File_ specification should get merged in interpre
 
 :: An _Interface_ is a specification of an _object_'s structure.
 
-Every _Interface_ has an {InterfaceName}, a number of _Interface properties_, and optionally a set of _Interface modifiers_.
+Every _Interface_ has an {InterfaceName}, _Interface properties_, and optionally a set of _Interface modifiers_.
 
 ```yaml example
 interfaces:
@@ -107,12 +107,12 @@ InterfaceDetails: "an object containing" InterfaceModifiers InterfaceProperties
 
 #### Interface modifiers
 
-:: _Interface modifiers_ are essentially statements modifying how the _Interface_'s definition should be intrepreted.
+:: _Interface modifiers_ are essentially statements modifying how the _Interface_'s definition should be interpreted.
 
-_Interface modifiers_ allow to modify interfaces by
+_Interface modifiers_ allow modifying interfaces by
 
 - making them _abstract_ (disallowing creation of instances of the _Interface_)
-- adding a description to the interface
+- adding a description to the _Interface_
 - extending another _Interface_ and inheriting its _Interface properties_
 
 ```yaml example
@@ -131,7 +131,7 @@ AbstractModifier: `__abstract: ` BooleanValue
 
 - Let the {BooleanValue} represent whether the current interface is abstract (default: false)
 - If the {BooleanValue} is {true}
-  - forbid creation of an _object_ of this _Interface_'s type, if possible within the _target language_
+  - forbid creating an _object_ of this _Interface_'s type, if possible within the _target language_
   - forbid using this _Interface_'s {InterfaceName} in the {MessagesSpecification}
 
 ExtendsModifier: `__extends: ` InterfaceName
@@ -194,10 +194,10 @@ PropertyType: TypeSpecifier
 
 ### Message types
 
-MessagesSpecification: `messages:` "an array consiting of" InterfaceName+
+MessagesSpecification: `messages:` "an array of" InterfaceName+
 
 - Let {InterfaceName} be a property of the {InterfaceSpecifications} object with an _array_ value.
-- If {InterfaceName} isn't specified in any {InterfaceSpecifications} in the type folder
+- If {InterfaceName} isn't specified in any {InterfaceSpecifications} in the _Types folder_
   - abort compilation with an error
 - Then every message must be of one of the types specified by the {InterfaceDetails} of the corresponding {InterfaceName}.
 
@@ -205,11 +205,12 @@ MessagesSpecification: `messages:` "an array consiting of" InterfaceName+
 
 :: A _Primitive_ is a type that cannot be further specified within the DSL.
 
-A _Primitive_ is clearly defined by a unique {PrimitiveName}.
+A _Primitive_ is defined by a unique {PrimitiveName}.
 
 Any _Primitive_ must get mapped to a type in every _target language_ for which a _Transpiler_ gets run.
 
-NOTE: A _Primitive_ within the DSL needn't necessarily be a "primitive" in a _target language_. For example, you can define a `date` primitive that can get mapped to a `DateTime` instance in Java. In this case, you couldn't define how a `date` gets represented any better within the DSL (making it a _Primitive_), but it wouldn't be a "primitive" value in Java.
+NOTE: A _Primitive_ within the DSL needn't necessarily be a "primitive" in a _target language_.
+For example, you can define a `date` primitive that can get mapped to a `DateTime` instance in Java. In this case, you couldn't define how a `date` gets represented any better within the DSL (making it a _Primitive_), but it wouldn't be a "primitive" value in Java.
 
 PrimitiveSpecification: `primitives:` "an object containing" Primitive+
 
