@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<!-- Built with spec-md https://spec-md.com -->
+<html>
+<head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>Telestion Message Type DSL Specification</title>
+<style>/** * prism.js default theme for JavaScript, CSS and HTML * Based on dabblet (http://dabblet.com) * @author Lea Verou */ code[class*="language-"], pre[class*="language-"] { 	color: black; 	background: none; 	text-shadow: 0 1px white; 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; 	font-size: 1em; 	text-align: left; 	white-space: pre; 	word-spacing: normal; 	word-break: normal; 	word-wrap: normal; 	line-height: 1.5; 	-moz-tab-size: 4; 	-o-tab-size: 4; 	tab-size: 4; 	-webkit-hyphens: none; 	-moz-hyphens: none; 	-ms-hyphens: none; 	hyphens: none; } pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection, code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection { 	text-shadow: none; 	background: #b3d4fc; } pre[class*="language-"]::selection, pre[class*="language-"] ::selection, code[class*="language-"]::selection, code[class*="language-"] ::selection { 	text-shadow: none; 	background: #b3d4fc; } @media print { 	code[class*="language-"], 	pre[class*="language-"] { 		text-shadow: none; 	} } /* Code blocks */ pre[class*="language-"] { 	padding: 1em; 	margin: .5em 0; 	overflow: auto; } :not(pre) > code[class*="language-"], pre[class*="language-"] { 	background: #f5f2f0; } /* Inline code */ :not(pre) > code[class*="language-"] { 	padding: .1em; 	border-radius: .3em; 	white-space: normal; } .token.comment, .token.prolog, .token.doctype, .token.cdata { 	color: slategray; } .token.punctuation { 	color: #999; } .token.namespace { 	opacity: .7; } .token.property, .token.tag, .token.boolean, .token.number, .token.constant, .token.symbol, .token.deleted { 	color: #905; } .token.selector, .token.attr-name, .token.string, .token.char, .token.builtin, .token.inserted { 	color: #690; } .token.operator, .token.entity, .token.url, .language-css .token.string, .style .token.string { 	color: #9a6e3a; 	/* This background color was intended by the author of this theme. */ 	background: hsla(0, 0%, 100%, .5); } .token.atrule, .token.attr-value, .token.keyword { 	color: #07a; } .token.function, .token.class-name { 	color: #DD4A68; } .token.regex, .token.important, .token.variable { 	color: #e90; } .token.important, .token.bold { 	font-weight: bold; } .token.italic { 	font-style: italic; } .token.entity { 	cursor: help; }</style>
+<style>:root{color:#333;font-family:Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;font-size:15px;line-height:1.5;--mono-font-size: 13px;--indent: 1rem;--list-indent: 1.5rem;--dfn-indent: 0rem}@media (min-width: 720px){:root{font-size:17px;--mono-font-size: 15px;--indent: 2rem;--list-indent: 2rem;--dfn-indent: 2rem}}body{margin:3rem 0 3rem}article{margin:0 1rem}@media (min-width: 720px){body{margin:6rem auto 3rem;max-width:800px;padding-left:75px;padding-right:clamp(0px,calc((100vw - 800px) * .25),75px)}}.source-link{display:none}@media screen and (min-width: 720px){.source-link{display:block;position:absolute;width:18px;fill:#ccc;opacity:.3}.source-link:hover{opacity:1}}.outdated-selection-link,.selection-link{position:absolute;display:block;color:#fff;--selection-background-color: #cacee0;background:var(--selection-background-color);border-radius:4px;font-size:36px;height:23px;line-height:48px;text-align:center;text-decoration:none;width:25px;user-select:none;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none}.outdated-selection-link:hover,.selection-link:hover{text-decoration:none}.outdated-selection-link:before,.selection-link:before{border:5px solid transparent;content:"";height:0;margin-top:-5px;margin-right:-5px;position:absolute;right:1px;top:50%;width:0}@media (max-width: 719px){.outdated-selection-link:before,.selection-link:before{border-bottom-color:var(--selection-background-color);border-top:0;right:50%;top:1px}}@media (min-width: 720px){.outdated-selection-link:before,.selection-link:before{border-left-color:var(--selection-background-color);border-right:0;right:1px;top:50%}}.selection-link:hover{--selection-background-color: #3b5998}.outdated-selection-link{--selection-background-color: #f0babe;font-size:21px;font-weight:800;line-height:27px}.outdated-selection-link:hover:after{content:"This selection content has changed since this link was created.";font:9pt/11pt Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;position:absolute;display:block;white-space:nowrap;padding:2px 5px 1px;top:-20px;background:black;color:#fff}a{color:#3b5998;text-decoration:none}a:hover{text-decoration:underline}img{max-width:100%}dl{margin:1rem 0 1rem var(--dfn-indent)}dd{margin:.25em 0 .5em var(--indent)}dd+dd{margin-top:1rem}dfn,.spec-ref{font-style:italic}dfn>a,.spec-ref>a{color:inherit}h1,h2,h3,h4,h5,h6{font-weight:bold;margin:3em 0 1em;position:relative}@media (min-width: 720px){header>h1{margin:6em 0 3em}}h1{font-size:1.5em;margin-top:5em}h2,h3{font-size:1.25em}h4,h5,h6{font-size:1em}section{padding-top:1rem;margin-top:-1rem}section.subsec>h6{margin-top:2em}section.subsec>h6>a{color:#333}section .spec-secid{margin-right:1ex}@media (min-width: 720px){section .spec-secid{position:absolute;right:100%;text-align:right;white-space:nowrap}}footer{font-size:75%;opacity:.5;text-align:center;margin-top:12rem}.spec-toc{margin:1rem 0 3rem}.spec-toc .title{content:"Contents";display:block;font-weight:bold;margin:5em 0 1em}.spec-toc .spec-secid{margin-right:1ex}.spec-toc ol{list-style:none;padding-left:0;margin-top:0;margin-bottom:0}.spec-toc ol ol{list-style:none;padding-left:2ex;margin-bottom:.25em}.spec-toc li{position:relative;padding:5px 0 0 30px;margin:-5px 0 0 -30px}.spec-toc a{color:#333}.spec-toc a:hover{text-decoration:none}.spec-toc a .spec-secid{color:#3b5998}.spec-toc a:hover .spec-secid{text-decoration:underline}.spec-toc .toggle{display:none}.spec-toc .toggle+label{cursor:pointer;left:6px;opacity:1;padding:5px 6px 5px 7px;position:absolute;top:6px;transform:rotate(0deg);transition:all .18s ease-in-out}.spec-toc .toggle+label:after{border-color:transparent transparent transparent #bbc;border-style:solid;border-width:6px 0 6px 7px;content:" ";display:block;height:0;width:0}@media (pointer: fine){.spec-toc .toggle+label{left:10px;padding:3px 5px 3px 6px;top:8px}}.spec-toc .toggle:checked+label{transform:rotate(90deg)}@media (hover: hover){.spec-toc li:not(:hover)>.toggle:checked+label{opacity:0}}.spec-toc .toggle:not(:checked)~ol{max-height:0;overflow:hidden;margin:0}.spec-sidebar-toggle{display:none}.spec-sidebar-toggle+label>.spec-sidebar-button{position:fixed;right:0;top:0;padding:10px 15px;font-size:30px;color:#000000b3;z-index:2;cursor:pointer;user-select:none;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none}.spec-sidebar-toggle:checked+label:after{content:"";position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0}.spec-sidebar{display:none;position:fixed;right:0;top:0;width:min(320px,calc(100vw - 48px));font-size:14px;line-height:1.75;overflow-y:scroll;height:100%;padding:0 0 5rem 30px;box-sizing:border-box;background:#f0f0f0;box-shadow:inset 1px 0 rgba(0,0,0,.05),-4px 0 8px -2px rgba(0,0,0,.04);overscroll-behavior:contain}.spec-sidebar{user-select:none;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none}.spec-sidebar-toggle:checked~.spec-sidebar{display:block}.spec-sidebar .viewing>a:after{color:#8b9;content:"\2022";margin-left:1ex}@media (min-width: 1220px){.spec-sidebar-toggle+label{display:none}.spec-sidebar{display:block;box-shadow:inset 1px 0 rgba(0,0,0,.05),inset 4px 0 8px -2px rgba(0,0,0,.08)!important}body{padding-right:345px}}.spec-note{background:#FEFEF3;border-left:solid 4px #F4E925;margin:1rem -1rem;min-width:70vw;padding:8px 1rem 12px calc(1rem - 4px);width:-moz-fit-content;width:-webkit-fit-content;width:fit-content}@media (min-width: 720px){.spec-note{min-width:416px}}.spec-note>a:first-child{color:#6c6613;display:block;font:italic 11pt/18pt Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;opacity:.6;user-select:none}.spec-todo{color:#666;margin:1em 0 1em 5em;min-height:1em}.spec-todo::before{content:"todo";display:block;float:left;margin-left:-5em;text-transform:uppercase}.spec-index ol{list-style-type:none;margin:0 0 0 var(--indent);padding:0;column-width:210px;column-gap:var(--indent)}.spec-index ol li{width:min-content;white-space:nowrap}pre,code{font-family:Consolas,Monaco,"Andale Mono","Ubuntu Mono",monospace;font-size:var(--mono-font-size);font-weight:inherit}code{background:rgba(0,0,0,.03);margin:-2px -1px;padding:3px 3px;white-space:pre-wrap}pre>code{background:none;font-weight:inherit;margin:0;padding:0;white-space:pre}pre{background:#FAFAFA;border-left:solid 4px #E9E9E9;margin:1rem -1rem;min-width:70vw;padding:12px 1rem 12px calc(1rem - 4px);width:-moz-fit-content;width:-webkit-fit-content;width:fit-content;max-width:calc(100vw - 2rem);overflow-y:scroll}@media (min-width: 720px){pre{min-width:40ch}}.spec-example{background:#FAFAFF;border-left:solid 4px #BBBBFF;padding-top:8px}.spec-counter-example{background:#FFFAFA;border-left:solid 4px #FFBBBB;padding-top:8px}.spec-example>a,.spec-counter-example>a{display:block;font:italic 11pt/18pt Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;opacity:.6;user-select:none}.spec-counter-example>a{color:#98593b}table{border-collapse:collapse}th{background-color:#f9f9f9}td,th{border:1px solid #D0D0D0;padding:.4em;vertical-align:baseline}ol,ul{padding-left:var(--list-indent)}li>ol,li>ul{margin-top:.25em;margin-bottom:.5em}li+li{margin-top:.25em}li.task{list-style-type:none;position:relative}li.task>input:first-child{margin-left:0;position:absolute;transform:translateX(calc(-100% - 1ch))}ins{background-color:#00c81e14;text-decoration:none}del{background-color:#c8000014}.spec-added,.spec-removed{border-left:4px solid;margin-left:-18px;padding-left:14px}.spec-added{border-color:#396}.spec-removed{border-color:#933;text-decoration:line-through}.spec-keyword{font-weight:bold}.spec-string{font-family:Consolas,Monaco,monospace;font-size:85%;white-space:pre}var{font-style:italic}*[data-name]{transition:.15s background ease-out;border-radius:2px;padding:0 3px;margin:0 -3px}.spec-semantic,.spec-algo{margin:1rem 0 1rem var(--dfn-indent)}.spec-semantic>.spec-nt::after,.spec-algo>.spec-call:first-child::after{content:":";font-style:normal;font-weight:bold;margin-left:1ex}.spec-semantic ol,.spec-semantic ol ol ol ol,.spec-algo ol,.spec-algo ol ol ol ol{list-style-type:decimal}.spec-semantic ol ol,.spec-semantic ol ol ol ol ol,.spec-algo ol ol,.spec-algo ol ol ol ol ol{list-style-type:lower-alpha}.spec-semantic ol ol ol,.spec-semantic ol ol ol ol ol ol,.spec-algo ol ol ol,.spec-algo ol ol ol ol ol ol{list-style-type:lower-roman}.spec-call>a{color:inherit}.spec-production{margin:1rem 0 1rem var(--dfn-indent)}.spec-production>.spec-nt::after{content:":";font-style:normal;font-weight:bold;margin:0 1ex}.spec-semantic.d2>.spec-nt::after,.spec-production.d2>.spec-nt::after{content:"::"}.spec-semantic.d3>.spec-nt::after,.spec-production.d3>.spec-nt::after{content:":::"}.spec-production>.spec-rhs{line-height:1.1;margin:.25em 0 .5em calc(2 * var(--indent));text-indent:calc(-1 * var(--indent))}.spec-semantic>.spec-rhs{display:inline-block;text-indent:calc(-1 * var(--indent));margin-left:calc(1ex + var(--indent))}.spec-rhs>*{text-indent:0}.spec-oneof{display:inline}.spec-oneof::before{content:"one of";font-style:normal;font-weight:bold}.spec-oneof-grid{max-width:calc(100vw - 2rem);overflow:scroll;margin:-1ex -1rem;padding:1ex 1rem}.spec-oneof-grid>table{margin-left:var(--indent)}.spec-oneof .spec-rhs{border:none;margin:0;padding:0 0 0 1rem;vertical-align:baseline;white-space:pre}.spec-oneof .spec-rhs:first-child{padding:0}.spec-rhs .spec-constrained:not(:first-child),.spec-rhs .spec-quantified:not(:first-child),.spec-rhs .spec-nt:not(:first-child),.spec-rhs .spec-t:not(:first-child),.spec-rhs .spec-rx:not(:first-child),.spec-rhs .spec-prose:not(:first-child),.spec-rhs .spec-empty:not(:first-child),.spec-rhs .spec-lookahead:not(:first-child){margin-left:1ex;display:inline-block}.spec-condition{font-size:85%}.spec-condition::before{content:"[if "}.spec-condition.not::before{content:"[if not "}.spec-condition::after{content:"]"}.spec-empty,.spec-prose{color:#666}.spec-nt{font-style:italic}.spec-nt>a{color:inherit}.spec-quantifiers,.spec-params{font-size:65%;font-style:normal;vertical-align:sub}.spec-quantifier.list{color:#3348d3}.spec-quantifier.optional{color:#83238e}.spec-params,.spec-condition{color:#1c7758}.spec-params::before{content:"["}.spec-params::after{content:"]"}.spec-quantifier:not(:last-child)::after,.spec-param:not(:last-child)::after{color:#666;content:", "}.spec-param.conditional::before{content:"?"}.spec-param.negated::before{content:"!"}.spec-t,.spec-rx{color:#333;font-family:monospace;font-weight:bold}.spec-butnot::before{color:#666;content:"but not";font-family:Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;font-weight:normal;margin-right:1ex}.spec-butnot>*:not(:first-child)::before{color:#666;content:"or";font-family:Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;font-weight:normal;margin-right:1ex}.spec-rhs .spec-oneof::before,.spec-rhs .spec-butnot::before{margin-left:1ex}.spec-lookahead>*{margin:0!important}.spec-lookahead>*:not(:first-child)::before{color:#666;content:", ";font-family:Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;font-style:normal;font-weight:normal}.spec-lookahead::before{color:#666;content:"[lookahead = ";font-family:Cambria,"Palatino Linotype",Palatino,"Liberation Serif",serif;font-style:normal;font-weight:normal}.spec-lookahead.not::before{content:"[lookahead \2260  "}.spec-lookahead.set::before{content:"[lookahead \2208  {";margin-right:0}.spec-lookahead.set.not::before{content:"[lookahead \2209  {"}.spec-lookahead.ntset::before{content:"[lookahead \2208  ";margin-right:0}.spec-lookahead.ntset.not::before{content:"[lookahead \2209  "}.spec-lookahead::after{color:#666;content:"]"}.spec-lookahead.set::after{content:"}]"}.token.atrule,.token.attr-value,.token.keyword,.token.property,.token.selector,.token.attr-name,.token.builtin,.token.entity,.token.url,.token.inserted{color:#1b1994b0;background:none}.token.tag,.token.boolean,.token.number,.token.string,.token.char,.token.constant,.token.symbol,.token.regex,.token.important,.token.variable,.token.function,.token.class-name,.token.deleted{color:#a20764bd}.token.comment,.token.prolog,.token.doctype,.token.cdata,.token.description{color:inherit;opacity:.3}.token.punctuation{color:inherit;opacity:.5}.token.operator,.token.namespace{color:inherit;opacity:.7}</style>
+<script>(function(){var r,a=[];document.addEventListener("readystatechange",function(){document.readyState==="interactive"&&u()});function u(){var n=document.querySelector('label[for="spec-sidebar-toggle"]');n.addEventListener("scroll",o),n.addEventListener("touchmove",o);function o(d){d.preventDefault()}for(var t=document.getElementsByTagName("section"),e=0;e<t.length;e++)t[e].getAttribute("secid")&&a.push(t[e]);var i=window.scrollY,c=!1;window.addEventListener("scroll",function(d){i=window.scrollY,c||(c=!0,window.requestAnimationFrame(function(){s(i),c=!1}))})}function s(n){for(var o=n+document.documentElement.clientHeight/4,t,e=a.length-1;e>=0;e--)if(a[e].offsetTop<o){t=a[e];break}var i=t&&t.getAttribute("secid");i!==r&&(r&&l(r,!1),i&&l(i,!0),r=i)}function l(n,o){document.getElementById("_sidebar_"+n).className=o?"viewing":"";for(var t=n.split(".");t.length;){var e=document.getElementById("_toggle_"+t.join("."));e&&(e.checked=o),t.pop()}}s(window.scrollY);})();</script>
+<script>(function(){var n=document.getElementsByTagName("style")[0].sheet,e;function u(){e&&(n.deleteRule(e),e=void 0)}function d(t){u(),e=n.insertRule('*[data-name="'+t+'"] { background: rgba(230,215,0,0.12); }',n.cssRules.length)}document.documentElement.addEventListener("mouseover",function(t){var a=t.target.attributes["data-name"];a&&d(a.value)});document.documentElement.addEventListener("mouseout",u);})();</script>
+<script>(function(){var R="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_",o,p,r,g;document.addEventListener("selectionchange",E);window.addEventListener("resize",C);window.addEventListener("hashchange",x);window.addEventListener("load",x);function S(n){y(new URL(n.target.href))}function x(){y(window.location)}function y(n){var e=n.hash.match(/^#sel-([A-Za-z0-9-_]+)$/);if(!!e){g=e[1],r=k(g);var t=r.getBoundingClientRect(),d=Math.max(20,Math.floor((window.innerHeight-t.height)*.4));window.scrollTo(0,window.scrollY+t.y-d);var c=document.getSelection();c.empty(),c.addRange(r),C()}}function E(n){var e=document.getSelection();if(e.isCollapsed)o&&(o.parentNode.removeChild(o),o=null);else{var t=e.getRangeAt(0);(!r||t.compareBoundaryPoints(Range.START_TO_START,r)!==0||t.compareBoundaryPoints(Range.END_TO_END,r)!==0)&&(r=t,g=B(r),C())}}function C(){if(!!r){p||(p=document.getElementsByTagName("article")[0]),o||(o=document.createElement("a"),document.body.appendChild(o)),o.href="#sel-"+g,o.onclick=S,o.className=r.isOutdated?"outdated-selection-link":"selection-link",o.innerText=r.isOutdated?"!":"\u201F";var n=window.innerWidth<720,e=r.getBoundingClientRect();if(n)o.style.left=Math.floor(e.x+e.width/2+window.scrollX-13)+"px",o.style.top=Math.floor(e.bottom+window.scrollY+10)+"px";else{var t=p.getBoundingClientRect().x;o.style.left=Math.floor(t+window.scrollX-37)+"px",o.style.top=Math.floor(e.y+window.scrollY-3)+"px"}}}function B(n){var e="",t=N(n.startContainer),d=N(n.endContainer),c=M(t,d);return l(c),l(t.slice(c.length).concat(n.startOffset)),l(d.slice(c.length).concat(n.endOffset)),i(L(n.toString())),e;function i(a){do e+=R[a&31|(a>31?32:0)],a>>=5;while(a>0)}function l(a){i(a.length);for(var h=0;h<a.length;h++)i(a[h])}}function k(n){for(var e=new Array(64),t=0;t<64;t++)e[R.charCodeAt(t)]=t;var d=0,c=m(),i=m(),l=m(),a=w(),h=i.pop(),P=O(c.concat(i)),T=l.pop(),A=O(c.concat(l)),u=document.createRange();return u.setStart(P,h),u.setEnd(A,T),u.isOutdated=a!==void 0&&a!==L(u.toString()),u;function w(){for(var s=0,v=0;d<n.length;){var f=e[n.charCodeAt(d++)];if(s|=(f&31)<<v,v+=5,f<32)return s}}function m(){var s=w();if(s!=null){for(var v=new Array(s),f=0;f<s;f++)v[f]=w();return v}}}function N(n){for(var e=[];n!=document.body;){var t=n.parentNode;e.push(Array.prototype.indexOf.call(t.childNodes,n)),n=t}return e.reverse()}function O(n){for(var e=document.body,t=0;t<n.length&&e;t++)e=e.childNodes[n[t]];return e}function M(n,e){for(var t=0;t<n.length&&t<e.length&&n[t]===e[t];)t++;return n.slice(0,t)}function L(n){for(var e=2166136261,t=0;t<n.length;++t)e^=n.charCodeAt(t),e+=(e<<1)+(e<<4)+(e<<7)+(e<<8)+(e<<24);return(e>>15^e)&32767}})();</script>
+</head>
+<body><article>
+<header>
+<h1>Telestion Message Type DSL Specification</h1>
+<section id="intro">
+<p>This document specifies the YAML-based Domain-specific language (DSL) for the specification of JSON message types within the Telestion ecosystem.</p>
+</section>
+<nav class="spec-toc">
+<div class="title">Contents</div>
+<ol>
+<li><a href="#sec-Prerequesites"><span class="spec-secid">1</span>Prerequesites</a><ol>
+<li><a href="#sec-JSON-base-types"><span class="spec-secid">1.1</span>JSON base types</a></li>
+<li><a href="#sec-YAML-Base-Types"><span class="spec-secid">1.2</span>YAML Base Types</a></li>
+<li><a href="#sec-Transpiler"><span class="spec-secid">1.3</span>Transpiler</a></li>
+<li><a href="#sec-Target-language"><span class="spec-secid">1.4</span>Target language</a></li>
+</ol>
+</li>
+<li><a href="#sec-Specification"><span class="spec-secid">2</span>Specification</a><ol>
+<li><a href="#sec-Types-folder"><span class="spec-secid">2.1</span>Types folder</a></li>
+<li><a href="#sec-Type-File"><span class="spec-secid">2.2</span>Type File</a></li>
+<li><a href="#sec-Interfaces"><span class="spec-secid">2.3</span>Interfaces</a><ol>
+<li><a href="#sec-Interface-modifiers"><span class="spec-secid">2.3.1</span>Interface modifiers</a></li>
+<li><a href="#sec-Interface-properties"><span class="spec-secid">2.3.2</span>Interface properties</a></li>
+</ol>
+</li>
+<li><a href="#sec-Message-types"><span class="spec-secid">2.4</span>Message types</a></li>
+<li><a href="#sec-Primitives"><span class="spec-secid">2.5</span>Primitives</a></li>
+<li><a href="#sec-Type-specifiers"><span class="spec-secid">2.6</span>Type specifiers</a><ol>
+<li><a href="#sec-Simple-type-specifier"><span class="spec-secid">2.6.1</span>Simple type specifier</a></li>
+<li><a href="#sec-Complex-type-specifier"><span class="spec-secid">2.6.2</span>Complex type specifier</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="#index"><span class="spec-secid">§</span>Index</a></li>
+</ol>
+</nav>
+</header>
+<section id="sec-Prerequesites" secid="1">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Prerequesites">1</a></span>Prerequesites</h1>
+<p>Please refer to the Specification for more information</p>
+<section id="sec-JSON-base-types" secid="1.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-JSON-base-types">1.1</a></span>JSON base types</h2>
+<p>For this documentation, we use the following base types / terminology:</p>
+<p>A <dfn id="string"><a href="#string" data-name="string">string</a></dfn> is a text-based value.</p>
+<p>A <dfn id="boolean"><a href="#boolean" data-name="boolean">boolean</a></dfn> is a value that can either be <span class="spec-keyword">true</span> or <span class="spec-keyword">false</span>.</p>
+<p>A <dfn id="number"><a href="#number" data-name="number">number</a></dfn> is a value representing a numeric value.</p>
+<p><dfn id="null"><a href="#null" data-name="null">null</a></dfn> is a value representing the explicit absence of a value.</p>
+<p>An <dfn id="object"><a href="#object" data-name="object">object</a></dfn> is a value that maps a <span class="spec-ref"><a href="#string" data-name="string">string</a></span>-based key to a <span class="spec-ref"><a href="#value" data-name="value">value</a></span> for any number of unique keys.</p>
+<p>An <dfn id="array"><a href="#array" data-name="array">array</a></dfn> is a value that contains a list where each item is a <span class="spec-ref"><a href="#value" data-name="value">value</a></span>.</p>
+<p>A <dfn id="value"><a href="#value" data-name="value">value</a></dfn> is either a <span class="spec-ref"><a href="#string" data-name="string">string</a></span>, a <span class="spec-ref"><a href="#boolean" data-name="boolean">boolean</a></span>, a <span class="spec-ref"><a href="#number" data-name="number">number</a></span>, <span class="spec-ref"><a href="#null" data-name="null">null</a></span>, an <span class="spec-ref"><a href="#object" data-name="object">object</a></span> or an <span class="spec-ref"><a href="#array" data-name="array">array</a></span>.</p>
+</section>
+<section id="sec-YAML-Base-Types" secid="1.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-YAML-Base-Types">1.2</a></span>YAML Base Types</h2>
+<p>A definition of the YAML expressions used within the DSL&rsquo;s syntax.</p>
+<div class="spec-production" id="BooleanValue">
+<span class="spec-nt"><a href="#BooleanValue" data-name="BooleanValue">BooleanValue</a></span><div class="spec-oneof"><div class="spec-oneof-grid"><table>
+<tr>
+<td class="spec-rhs"><span class="spec-t">true</span></td></tr>
+<tr>
+<td class="spec-rhs"><span class="spec-t">false</span></td></tr>
+</table></div></div>
+</div>
+<div class="spec-production" id="StringValue">
+<span class="spec-nt"><a href="#StringValue" data-name="StringValue">StringValue</a></span><div class="spec-rhs"><span class="spec-prose">any YAML syntax representing a string value</span></div>
+</div>
+<div class="spec-production" id="NumberValue">
+<span class="spec-nt"><a href="#NumberValue" data-name="NumberValue">NumberValue</a></span><div class="spec-rhs"><span class="spec-prose">any YAML syntax representing a number value</span></div>
+</div>
+</section>
+<section id="sec-Transpiler" secid="1.3">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Transpiler">1.3</a></span>Transpiler</h2>
+<p>A <dfn id="transpiler"><a href="#transpiler" data-name="transpiler">transpiler</a></dfn> generates code for a <span class="spec-ref"><a href="#target-language" data-name="target-language">target language</a></span> from the DSL defined in this document.</p>
+</section>
+<section id="sec-Target-language" secid="1.4">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Target-language">1.4</a></span>Target language</h2>
+<p>A <dfn id="target-language"><a href="#target-language" data-name="target-language">target language</a></dfn> is a programming language for which you generate code representing the types defined with the DSL defined in this document.</p>
+<p>Every Telestion project can have an arbitrary number of <span class="spec-ref"><a href="#target-language" data-name="target-language">target language</a></span>s.</p>
+<div id="note-e0e39" class="spec-note">
+<a href="#note-e0e39">Note</a>
+The most common <span class="spec-ref"><a href="#target-language" data-name="target-language">target language</a></span>s for Telestion projects are Java and TypeScript.</div>
+</section>
+</section>
+<section id="sec-Specification" secid="2">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Specification">2</a></span>Specification</h1>
+<section id="sec-Types-folder" secid="2.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Types-folder">2.1</a></span>Types folder</h2>
+<p>The <dfn id="types-folder"><a href="#types-folder" data-name="types-folder">Types folder</a></dfn> is a folder that contains type files. Its location is determined by the tooling used in the concrete Telestion Project.</p>
+</section>
+<section id="sec-Type-File" secid="2.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Type-File">2.2</a></span>Type File</h2>
+<p>A <dfn id="type-file"><a href="#type-file" data-name="type-file">Type File</a></dfn> is any file within the <span class="spec-ref"><a href="#types-folder" data-name="types-folder">Types folder</a></span> with the file extension <code>.types.yaml</code>. Its contents are defined by <span class="spec-nt"><a href="#TypeFileContent" data-name="TypeFileContent">TypeFileContent</a></span>.</p>
+<div class="spec-production" id="TypeFileContent">
+<span class="spec-nt"><a href="#TypeFileContent" data-name="TypeFileContent">TypeFileContent</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#InterfaceSpecifications" data-name="InterfaceSpecifications">InterfaceSpecifications</a></span><span class="spec-nt"><a href="#MessagesSpecification" data-name="MessagesSpecification">MessagesSpecification</a></span><span class="spec-quantified"><span class="spec-nt"><span data-name="PrimitiveSpecification">PrimitiveSpecification</span></span><span class="spec-quantifiers"><span class="spec-quantifier optional">opt</span></span></span></div>
+</div>
+<p><span class="spec-nt"><a href="#TypeFileContent" data-name="TypeFileContent">TypeFileContent</a></span> must be a valid YAML file.</p>
+</section>
+<section id="sec-Interfaces" secid="2.3">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Interfaces">2.3</a></span>Interfaces</h2>
+<p>An <dfn id="interface"><a href="#interface" data-name="interface">Interface</a></dfn> is a specification of an <span class="spec-ref"><a href="#object" data-name="object">object</a></span>&lsquo;s structure.</p>
+<p>Every <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span> has an <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span>, a number of <span class="spec-ref"><a href="#interface-properties" data-name="interface-properties">Interface properties</a></span>, and optionally a set of <span class="spec-ref"><a href="#interface-modifiers" data-name="interface-modifiers">Interface modifiers</a></span>.</p>
+<pre id="example-49ba0" class="spec-example" data-language="yaml"><a href="#example-49ba0">Example № 1</a><code><span class="token key atrule">interfaces</span><span class="token punctuation">:</span>
+  <span class="token key atrule">BaseMessage</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span> string
+  <span class="token key atrule">MyMessage</span><span class="token punctuation">:</span>
+    <span class="token key atrule">type</span><span class="token punctuation">:</span>
+      <span class="token key atrule">value</span><span class="token punctuation">:</span> <span class="token string">"my"</span>
+    <span class="token key atrule">numbers</span><span class="token punctuation">:</span> double<span class="token punctuation">[</span><span class="token punctuation">]</span>
+</code></pre>
+<div class="spec-semantic" id="InterfaceSpecifications">
+<span class="spec-nt"><a href="#InterfaceSpecifications" data-name="InterfaceSpecifications">InterfaceSpecifications</a></span><div class="spec-rhs"><span class="spec-t">interfaces:</span><span class="spec-quantified"><span class="spec-nt"><a href="#InterfaceSpecification" data-name="InterfaceSpecification">InterfaceSpecification</a></span><span class="spec-quantifiers"><span class="spec-quantifier list">list</span></span></span></div>
+<ol>
+<li>Let <span class="spec-nt"><a href="#InterfaceSpecifications" data-name="InterfaceSpecifications">InterfaceSpecifications</a></span> be the <code>interfaces</code> property (an <span class="spec-ref"><a href="#object" data-name="object">object</a></span>) of the <span class="spec-ref"><a href="#type-file" data-name="type-file">Type File</a></span>&lsquo;s root <span class="spec-ref"><a href="#object" data-name="object">object</a></span>.</li>
+<li>Then <span class="spec-quantified"><span class="spec-nt"><a href="#InterfaceSpecification" data-name="InterfaceSpecification">InterfaceSpecification</a></span><span class="spec-quantifiers"><span class="spec-quantifier list">list</span></span></span> contains the definitions of the interfaces defined by the current <span class="spec-ref"><a href="#type-file" data-name="type-file">Type File</a></span>.</li>
+</ol>
+</div>
+<div class="spec-semantic" id="InterfaceSpecification">
+<span class="spec-nt"><a href="#InterfaceSpecification" data-name="InterfaceSpecification">InterfaceSpecification</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span><span class="spec-t">:</span><span class="spec-nt"><a href="#InterfaceDetails" data-name="InterfaceDetails">InterfaceDetails</a></span></div>
+<ol>
+<li>Let <span class="spec-nt"><a href="#InterfaceSpecification" data-name="InterfaceSpecification">InterfaceSpecification</a></span> be a property of the <span class="spec-nt"><a href="#InterfaceSpecifications" data-name="InterfaceSpecifications">InterfaceSpecifications</a></span> <span class="spec-ref"><a href="#object" data-name="object">object</a></span></li>
+<li>Let <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span> be the key of the <span class="spec-nt"><a href="#InterfaceSpecifications" data-name="InterfaceSpecifications">InterfaceSpecifications</a></span> property</li>
+<li>Let <span class="spec-nt"><a href="#InterfaceDetails" data-name="InterfaceDetails">InterfaceDetails</a></span> be the properties of an <span class="spec-ref"><a href="#object" data-name="object">object</a></span>.</li>
+</ol>
+</div>
+<div class="spec-todo">
+Handling of duplicate interface names</div>
+<div class="spec-semantic" id="InterfaceName">
+<span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span><div class="spec-rhs"><span class="spec-rx">/^[A-Z][a-za-z0-9]+$/</span></div>
+<ol>
+<li>If any <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span> doesn&rsquo;t match the specified pattern<ol>
+<li>show a warning. The pattern is supposed to enable maximum cross-language support.</li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="spec-production" id="InterfaceDetails">
+<span class="spec-nt"><a href="#InterfaceDetails" data-name="InterfaceDetails">InterfaceDetails</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#InterfaceModifiers" data-name="InterfaceModifiers">InterfaceModifiers</a></span><span class="spec-nt"><a href="#InterfaceProperties" data-name="InterfaceProperties">InterfaceProperties</a></span></div>
+</div>
+<section id="sec-Interface-modifiers" secid="2.3.1">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Interface-modifiers">2.3.1</a></span>Interface modifiers</h3>
+<p><dfn id="interface-modifiers"><a href="#interface-modifiers" data-name="interface-modifiers">Interface modifiers</a></dfn> are essentially statements modifying how the <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span>&lsquo;s definition should be intrepreted.</p>
+<p><span class="spec-ref"><a href="#interface-modifiers" data-name="interface-modifiers">Interface modifiers</a></span> allow to modify interfaces by</p>
+<ul>
+<li>making them <em>abstract</em> (disallowing creation of instances of the <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span>)</li>
+<li>adding a description to the interface</li>
+<li>extending another <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span> and inheriting its <span class="spec-ref"><a href="#interface-properties" data-name="interface-properties">Interface properties</a></span></li>
+</ul>
+<pre id="example-9df4a" class="spec-example" data-language="yaml"><a href="#example-9df4a">Example № 2</a><code><span class="token key atrule">interfaces</span><span class="token punctuation">:</span>
+  <span class="token key atrule">BaseInterface</span><span class="token punctuation">:</span>
+    <span class="token key atrule">__abstract</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+
+  <span class="token key atrule">MyInterface</span><span class="token punctuation">:</span>
+    <span class="token key atrule">__extends</span><span class="token punctuation">:</span> BaseInterface
+    <span class="token key atrule">__description</span><span class="token punctuation">:</span> <span class="token string">"A nice little interface"</span>
+</code></pre>
+<div class="spec-production" id="InterfaceModifiers">
+<span class="spec-nt"><a href="#InterfaceModifiers" data-name="InterfaceModifiers">InterfaceModifiers</a></span><div class="spec-rhs"><span class="spec-quantified"><span class="spec-nt"><a href="#AbstractModifier" data-name="AbstractModifier">AbstractModifier</a></span><span class="spec-quantifiers"><span class="spec-quantifier optional">opt</span></span></span><span class="spec-quantified"><span class="spec-nt"><a href="#ExtendsModifier" data-name="ExtendsModifier">ExtendsModifier</a></span><span class="spec-quantifiers"><span class="spec-quantifier optional">opt</span></span></span><span class="spec-quantified"><span class="spec-nt"><a href="#DescriptionModifier" data-name="DescriptionModifier">DescriptionModifier</a></span><span class="spec-quantifiers"><span class="spec-quantifier optional">opt</span></span></span></div>
+</div>
+<div class="spec-semantic" id="AbstractModifier">
+<span class="spec-nt"><a href="#AbstractModifier" data-name="AbstractModifier">AbstractModifier</a></span><div class="spec-rhs"><span class="spec-t">__abstract: </span><span class="spec-nt"><a href="#BooleanValue" data-name="BooleanValue">BooleanValue</a></span></div>
+<ol>
+<li>Let the <span class="spec-nt"><a href="#BooleanValue" data-name="BooleanValue">BooleanValue</a></span> represent whether the current interface is abstract (default: false)</li>
+<li>If the <span class="spec-nt"><a href="#BooleanValue" data-name="BooleanValue">BooleanValue</a></span> is <span class="spec-keyword">true</span><ol>
+<li>forbid creation of an <span class="spec-ref"><a href="#object" data-name="object">object</a></span> of this <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span>&lsquo;s type, if possible within the <span class="spec-ref"><a href="#target-language" data-name="target-language">target language</a></span></li>
+<li>forbid using this <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span>&lsquo;s <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span> in the <span class="spec-nt"><a href="#MessagesSpecification" data-name="MessagesSpecification">MessagesSpecification</a></span></li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="spec-semantic" id="ExtendsModifier">
+<span class="spec-nt"><a href="#ExtendsModifier" data-name="ExtendsModifier">ExtendsModifier</a></span><div class="spec-rhs"><span class="spec-t">__extends: </span><span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span></div>
+<ol>
+<li>Let <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span> be any defined <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span>&lsquo;s name.</li>
+<li>If the current <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span> declares any property whose <span class="spec-nt"><a href="#PropertyType" data-name="PropertyType">PropertyType</a></span> is incompatible with the <span class="spec-nt"><a href="#PropertyType" data-name="PropertyType">PropertyType</a></span> of any <span class="spec-ref"><a href="#interface-properties" data-name="interface-properties">Interface properties</a></span> with the same name <span class="spec-nt"><a href="#PropertyName" data-name="PropertyName">PropertyName</a></span> in the <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span> <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span><ol>
+<li>abort with an error message</li>
+</ol>
+</li>
+<li>Then, the following statements are true for the current <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span>:<ol>
+<li>it contains all <span class="spec-ref"><a href="#interface-properties" data-name="interface-properties">Interface properties</a></span> from the <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span> with the provided <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span></li>
+<li>it contains all <span class="spec-ref"><a href="#interface-properties" data-name="interface-properties">Interface properties</a></span> declared by the current <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span></li>
+<li>for any <span class="spec-ref"><a href="#interface-properties" data-name="interface-properties">Interface properties</a></span> with the same <span class="spec-nt"><a href="#PropertyName" data-name="PropertyName">PropertyName</a></span>, the strictest type gets used.</li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="spec-semantic" id="DescriptionModifier">
+<span class="spec-nt"><a href="#DescriptionModifier" data-name="DescriptionModifier">DescriptionModifier</a></span><div class="spec-rhs"><span class="spec-t">__description: </span><span class="spec-nt"><a href="#StringValue" data-name="StringValue">StringValue</a></span></div>
+<ol>
+<li>Let <span class="spec-nt"><a href="#StringValue" data-name="StringValue">StringValue</a></span> be any <span class="spec-ref"><a href="#string" data-name="string">string</a></span></li>
+<li>Then <span class="spec-nt"><a href="#StringValue" data-name="StringValue">StringValue</a></span> represents a text description of the current <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span></li>
+</ol>
+</div>
+</section>
+<section id="sec-Interface-properties" secid="2.3.2">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Interface-properties">2.3.2</a></span>Interface properties</h3>
+<p><dfn id="interface-properties"><a href="#interface-properties" data-name="interface-properties">Interface properties</a></dfn> are the properties of an <span class="spec-ref"><a href="#object" data-name="object">object</a></span> of the <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span>&lsquo;s type.</p>
+<div class="spec-semantic" id="InterfaceProperties">
+<span class="spec-nt"><a href="#InterfaceProperties" data-name="InterfaceProperties">InterfaceProperties</a></span><div class="spec-rhs"><span class="spec-quantified"><span class="spec-nt"><a href="#Property" data-name="Property">Property</a></span><span class="spec-quantifiers"><span class="spec-quantifier list">list</span></span></span></div>
+<ol>
+<li>Let <span class="spec-nt"><a href="#InterfaceProperties" data-name="InterfaceProperties">InterfaceProperties</a></span> be the collection of properties in an <span class="spec-nt"><a href="#InterfaceDetails" data-name="InterfaceDetails">InterfaceDetails</a></span> object where the keys don&rsquo;t correspond to any <span class="spec-nt"><span data-name="InterfaceModifier">InterfaceModifier</span></span>.</li>
+<li>Then <span class="spec-quantified"><span class="spec-nt"><a href="#Property" data-name="Property">Property</a></span><span class="spec-quantifiers"><span class="spec-quantifier list">list</span></span></span> represents all properties of any <span class="spec-ref"><a href="#object" data-name="object">object</a></span> of the <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span>&lsquo;s type.</li>
+</ol>
+</div>
+<div class="spec-semantic" id="Property">
+<span class="spec-nt"><a href="#Property" data-name="Property">Property</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#PropertyName" data-name="PropertyName">PropertyName</a></span><span class="spec-t">:</span><span class="spec-nt"><a href="#PropertyType" data-name="PropertyType">PropertyType</a></span></div>
+<ol>
+<li>Any <span class="spec-ref"><a href="#object" data-name="object">object</a></span> of the <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span>&lsquo;s type must contain a property with the key <span class="spec-nt"><a href="#PropertyName" data-name="PropertyName">PropertyName</a></span> with a <span class="spec-ref"><a href="#value" data-name="value">value</a></span> of the type <span class="spec-nt"><a href="#PropertyType" data-name="PropertyType">PropertyType</a></span>.</li>
+</ol>
+</div>
+<div class="spec-todo">
+Handling of duplicate property names</div>
+<div class="spec-semantic" id="PropertyName">
+<span class="spec-nt"><a href="#PropertyName" data-name="PropertyName">PropertyName</a></span><div class="spec-rhs"><span class="spec-rx">/^[a-z][a-z0-9]*$/</span></div>
+<ol>
+<li>If any <span class="spec-nt"><a href="#PropertyName" data-name="PropertyName">PropertyName</a></span> doesn&rsquo;t match the specified pattern<ol>
+<li>show a warning. The pattern is supposed to enable maximum cross-language support.</li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="spec-production" id="PropertyType">
+<span class="spec-nt"><a href="#PropertyType" data-name="PropertyType">PropertyType</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#TypeSpecifier" data-name="TypeSpecifier">TypeSpecifier</a></span></div>
+</div>
+</section>
+</section>
+<section id="sec-Message-types" secid="2.4">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Message-types">2.4</a></span>Message types</h2>
+<div class="spec-semantic" id="MessagesSpecification">
+<span class="spec-nt"><a href="#MessagesSpecification" data-name="MessagesSpecification">MessagesSpecification</a></span><div class="spec-rhs"><span class="spec-quantified"><span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span><span class="spec-quantifiers"><span class="spec-quantifier list">list</span></span></span></div>
+<ol>
+<li>Let <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span> be a property of the <span class="spec-nt"><a href="#InterfaceSpecifications" data-name="InterfaceSpecifications">InterfaceSpecifications</a></span> object with an <span class="spec-ref"><a href="#array" data-name="array">array</a></span> value.</li>
+<li>If <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span> isn&rsquo;t specified in any <span class="spec-nt"><a href="#InterfaceSpecifications" data-name="InterfaceSpecifications">InterfaceSpecifications</a></span> in the type folder<ol>
+<li>abort compilation with an error</li>
+</ol>
+</li>
+<li>Then every message must be of one of the types specified by the <span class="spec-nt"><a href="#InterfaceDetails" data-name="InterfaceDetails">InterfaceDetails</a></span> of the corresponding <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span>.</li>
+</ol>
+</div>
+</section>
+<section id="sec-Primitives" secid="2.5">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Primitives">2.5</a></span>Primitives</h2>
+<p>A <dfn id="primitive"><a href="#primitive" data-name="primitive">Primitive</a></dfn> is a type that cannot be further specified within the DSL.</p>
+<p>A <span class="spec-ref"><a href="#primitive" data-name="primitive">Primitive</a></span> is clearly defined by a unique <span class="spec-nt"><span data-name="PrimitiveName">PrimitiveName</span></span>.</p>
+<p>Any <span class="spec-ref"><a href="#primitive" data-name="primitive">Primitive</a></span> must get mapped to a type in every <span class="spec-ref"><a href="#target-language" data-name="target-language">target language</a></span>.</p>
+<div id="note-03519" class="spec-note">
+<a href="#note-03519">Note</a>
+A <span class="spec-ref"><a href="#primitive" data-name="primitive">Primitive</a></span> within the DSL needn&rsquo;t necessarily be a &ldquo;primitive&rdquo; in a <span class="spec-ref"><a href="#target-language" data-name="target-language">target language</a></span>. For example, you can define a <code>date</code> primitive that can get mapped to a <code>DateTime</code> instance in Java. In this case, you couldn&rsquo;t define how a <code>date</code> gets represented any better within the DSL (making it a <span class="spec-ref"><a href="#primitive" data-name="primitive">Primitive</a></span>), but it wouldn&rsquo;t be a &ldquo;primitive&rdquo; value in Java.</div>
+</section>
+<section id="sec-Type-specifiers" secid="2.6">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Type-specifiers">2.6</a></span>Type specifiers</h2>
+<p>A <dfn id="type-specifier"><a href="#type-specifier" data-name="type-specifier">Type Specifier</a></dfn> is a representation of a <span class="spec-ref"><a href="#value" data-name="value">value</a></span>&lsquo;s type.</p>
+<div class="spec-production" id="TypeSpecifier">
+<span class="spec-nt"><a href="#TypeSpecifier" data-name="TypeSpecifier">TypeSpecifier</a></span><div class="spec-oneof"><div class="spec-oneof-grid"><table>
+<tr>
+<td class="spec-rhs"><span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span></td><td class="spec-rhs"><span class="spec-nt"><a href="#ComplexTypeSpecifier" data-name="ComplexTypeSpecifier">ComplexTypeSpecifier</a></span></td></tr>
+</table></div></div>
+</div>
+<section id="sec-Simple-type-specifier" secid="2.6.1">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Simple-type-specifier">2.6.1</a></span>Simple type specifier</h3>
+<p>A <dfn id="simple-type-specifier"><a href="#simple-type-specifier" data-name="simple-type-specifier">Simple type specifier</a></dfn> is a representation of a <span class="spec-ref"><a href="#value" data-name="value">value</a></span>&lsquo;s type as a <span class="spec-ref"><a href="#string" data-name="string">string</a></span>.</p>
+<pre id="example-7ac9e" class="spec-example"><a href="#example-7ac9e">Example № 3</a><code>string[]
+(string | number)[]?
+(string[] | number | MyInterface?[])[]
+</code></pre>
+<div class="spec-production" id="SimpleTypeSpecifier">
+<span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span><div class="spec-oneof"><div class="spec-oneof-grid"><table>
+<tr>
+<td class="spec-rhs"><span class="spec-nt"><a href="#ParenthesizedTypeSpecifier" data-name="ParenthesizedTypeSpecifier">ParenthesizedTypeSpecifier</a></span></td></tr>
+<tr>
+<td class="spec-rhs"><span class="spec-nt"><a href="#ArrayTypeSpecifier" data-name="ArrayTypeSpecifier">ArrayTypeSpecifier</a></span></td></tr>
+<tr>
+<td class="spec-rhs"><span class="spec-nt"><a href="#NullableTypeSpecifier" data-name="NullableTypeSpecifier">NullableTypeSpecifier</a></span></td></tr>
+<tr>
+<td class="spec-rhs"><span class="spec-nt"><a href="#UnionTypeSpecifier" data-name="UnionTypeSpecifier">UnionTypeSpecifier</a></span></td></tr>
+<tr>
+<td class="spec-rhs"><span class="spec-nt"><a href="#InterfaceTypeSpecifier" data-name="InterfaceTypeSpecifier">InterfaceTypeSpecifier</a></span></td></tr>
+<tr>
+<td class="spec-rhs"><span class="spec-nt"><a href="#PrimitiveTypeSpecifier" data-name="PrimitiveTypeSpecifier">PrimitiveTypeSpecifier</a></span></td></tr>
+</table></div></div>
+</div>
+<div class="spec-semantic" id="ParenthesizedTypeSpecifier">
+<span class="spec-nt"><a href="#ParenthesizedTypeSpecifier" data-name="ParenthesizedTypeSpecifier">ParenthesizedTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-t">(</span><span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span><span class="spec-t">)</span></div>
+<ol>
+<li>Then the resulting type is equivalent to the type specified by the <span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span></li>
+</ol>
+</div>
+<div class="spec-semantic" id="ArrayTypeSpecifier">
+<span class="spec-nt"><a href="#ArrayTypeSpecifier" data-name="ArrayTypeSpecifier">ArrayTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span><span class="spec-t">[]</span></div>
+<ol>
+<li>Then the resulting type is an array whose values are of the type specified by the <span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span></li>
+</ol>
+</div>
+<div class="spec-semantic" id="NullableTypeSpecifier">
+<span class="spec-nt"><a href="#NullableTypeSpecifier" data-name="NullableTypeSpecifier">NullableTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span><span class="spec-t">?</span></div>
+<ol>
+<li>Then the resulting type can be the type specified by the <span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span> or <span class="spec-ref"><a href="#null" data-name="null">null</a></span>.</li>
+</ol>
+</div>
+<div class="spec-semantic" id="UnionTypeSpecifier">
+<span class="spec-nt"><a href="#UnionTypeSpecifier" data-name="UnionTypeSpecifier">UnionTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span><span class="spec-t">|</span><span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span></div>
+<ol>
+<li>Then the resulting type can be the type specified by either the first or the second <span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span>.</li>
+</ol>
+</div>
+<div class="spec-semantic" id="InterfaceTypeSpecifier">
+<span class="spec-nt"><a href="#InterfaceTypeSpecifier" data-name="InterfaceTypeSpecifier">InterfaceTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span></div>
+<ol>
+<li>If no <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span> with the given <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span> is defined<ol>
+<li>abort with an error.</li>
+</ol>
+</li>
+<li>Then the resulting type is an <span class="spec-ref"><a href="#object" data-name="object">object</a></span> with the structure specified by the <span class="spec-nt"><a href="#InterfaceDetails" data-name="InterfaceDetails">InterfaceDetails</a></span> of the <span class="spec-ref"><a href="#interface" data-name="interface">Interface</a></span> with the corresponding <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span>.</li>
+</ol>
+</div>
+<div class="spec-semantic" id="PrimitiveTypeSpecifier">
+<span class="spec-nt"><a href="#PrimitiveTypeSpecifier" data-name="PrimitiveTypeSpecifier">PrimitiveTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-nt"><span data-name="PrimitiveName">PrimitiveName</span></span></div>
+<ol>
+<li>If no <span class="spec-ref"><a href="#primitive" data-name="primitive">Primitive</a></span> with the given <span class="spec-nt"><span data-name="PrimitiveName">PrimitiveName</span></span> is defined<ol>
+<li>abort with an error.</li>
+</ol>
+</li>
+<li>Then the resulting type is the target language&rsquo;s type defined by the <span class="spec-ref"><a href="#primitive" data-name="primitive">Primitive</a></span> with the given <span class="spec-nt"><span data-name="PrimitiveName">PrimitiveName</span></span>.</li>
+</ol>
+</div>
+</section>
+<section id="sec-Complex-type-specifier" secid="2.6.2">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Complex-type-specifier">2.6.2</a></span>Complex type specifier</h3>
+<p>A <dfn id="complex-type-specifier"><a href="#complex-type-specifier" data-name="complex-type-specifier">Complex type specifier</a></dfn> is an <span class="spec-ref"><a href="#object" data-name="object">object</a></span> representing a type that allows for specification of more details for that type than a <span class="spec-ref"><a href="#simple-type-specifier" data-name="simple-type-specifier">Simple type specifier</a></span>.</p>
+<div class="spec-production" id="ComplexTypeSpecifier">
+<span class="spec-nt"><a href="#ComplexTypeSpecifier" data-name="ComplexTypeSpecifier">ComplexTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-prose">an object-based specification of a value&rsquo;s type that allows for a few more options</span></div>
+</div>
+</section>
+</section>
+</section>
+<section id="index" secid="index" class="spec-index">
+<h1>
+<span class="spec-secid" title="link to the index"><a href="#index">§</a></span>Index</h1>
+<ol>
+<li><a href="#array">array</a></li>
+<li><a href="#boolean">boolean</a></li>
+<li><a href="#BooleanValue">BooleanValue</a></li>
+<li><a href="#complex-type-specifier">Complex type specifier</a></li>
+<li><a href="#ComplexTypeSpecifier">ComplexTypeSpecifier</a></li>
+<li><a href="#interface">Interface</a></li>
+<li><a href="#interface-modifiers">Interface modifiers</a></li>
+<li><a href="#interface-properties">Interface properties</a></li>
+<li><a href="#InterfaceDetails">InterfaceDetails</a></li>
+<li><a href="#InterfaceModifiers">InterfaceModifiers</a></li>
+<li><a href="#null">null</a></li>
+<li><a href="#number">number</a></li>
+<li><a href="#NumberValue">NumberValue</a></li>
+<li><a href="#object">object</a></li>
+<li><a href="#primitive">Primitive</a></li>
+<li><a href="#PropertyType">PropertyType</a></li>
+<li><a href="#simple-type-specifier">Simple type specifier</a></li>
+<li><a href="#SimpleTypeSpecifier">SimpleTypeSpecifier</a></li>
+<li><a href="#string">string</a></li>
+<li><a href="#StringValue">StringValue</a></li>
+<li><a href="#target-language">target language</a></li>
+<li><a href="#transpiler">transpiler</a></li>
+<li><a href="#type-file">Type File</a></li>
+<li><a href="#type-specifier">Type Specifier</a></li>
+<li><a href="#TypeFileContent">TypeFileContent</a></li>
+<li><a href="#types-folder">Types folder</a></li>
+<li><a href="#TypeSpecifier">TypeSpecifier</a></li>
+<li><a href="#value">value</a></li>
+</ol>
+</section>
+</article>
+<footer>
+Written in <a href="https://spec-md.com" target="_blank">Spec Markdown</a>.</footer>
+<input hidden class="spec-sidebar-toggle" type="checkbox" id="spec-sidebar-toggle" aria-hidden /><label for="spec-sidebar-toggle" aria-hidden><div class="spec-sidebar-button">&#x2630;</div></label>
+<div class="spec-sidebar" aria-hidden>
+<div class="spec-toc">
+<div class="title"><a href="#">Telestion Message Type DSL Specification</a></div>
+<ol><li id="_sidebar_1"><a href="#sec-Prerequesites"><span class="spec-secid">1</span>Prerequesites</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_1" /><label for="_toggle_1"></label>
+<ol>
+<li id="_sidebar_1.1"><a href="#sec-JSON-base-types"><span class="spec-secid">1.1</span>JSON base types</a></li>
+<li id="_sidebar_1.2"><a href="#sec-YAML-Base-Types"><span class="spec-secid">1.2</span>YAML Base Types</a></li>
+<li id="_sidebar_1.3"><a href="#sec-Transpiler"><span class="spec-secid">1.3</span>Transpiler</a></li>
+<li id="_sidebar_1.4"><a href="#sec-Target-language"><span class="spec-secid">1.4</span>Target language</a></li>
+</ol>
+</li>
+<li id="_sidebar_2"><a href="#sec-Specification"><span class="spec-secid">2</span>Specification</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_2" /><label for="_toggle_2"></label>
+<ol>
+<li id="_sidebar_2.1"><a href="#sec-Types-folder"><span class="spec-secid">2.1</span>Types folder</a></li>
+<li id="_sidebar_2.2"><a href="#sec-Type-File"><span class="spec-secid">2.2</span>Type File</a></li>
+<li id="_sidebar_2.3"><a href="#sec-Interfaces"><span class="spec-secid">2.3</span>Interfaces</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_2.3" /><label for="_toggle_2.3"></label>
+<ol>
+<li id="_sidebar_2.3.1"><a href="#sec-Interface-modifiers"><span class="spec-secid">2.3.1</span>Interface modifiers</a></li>
+<li id="_sidebar_2.3.2"><a href="#sec-Interface-properties"><span class="spec-secid">2.3.2</span>Interface properties</a></li>
+</ol>
+</li>
+<li id="_sidebar_2.4"><a href="#sec-Message-types"><span class="spec-secid">2.4</span>Message types</a></li>
+<li id="_sidebar_2.5"><a href="#sec-Primitives"><span class="spec-secid">2.5</span>Primitives</a></li>
+<li id="_sidebar_2.6"><a href="#sec-Type-specifiers"><span class="spec-secid">2.6</span>Type specifiers</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_2.6" /><label for="_toggle_2.6"></label>
+<ol>
+<li id="_sidebar_2.6.1"><a href="#sec-Simple-type-specifier"><span class="spec-secid">2.6.1</span>Simple type specifier</a></li>
+<li id="_sidebar_2.6.2"><a href="#sec-Complex-type-specifier"><span class="spec-secid">2.6.2</span>Complex type specifier</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li id="_sidebar_index"><a href="#index"><span class="spec-secid">§</span>Index</a></li>
+</ol>
+</div>
+</div>
+</body>
+</html>
