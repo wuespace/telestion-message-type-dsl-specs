@@ -276,7 +276,7 @@ NOTE: We evaluated using the GraphQL syntax for compatibility, but found it to b
 
 ComplexTypeSpecifier: "an object consisting of" ComplexTypeSpecifierType? ComplexTypeSpecifierValue? ComplexTypeSpecifierMinimumValue? ComplexTypeSpecifierMaximumValue?
 
-- If no {ComplexTypeSpecifierType?} (or {SimpleTypeSpecifier}) exists for the current property in the current _Interface_ or any of the _Interface_s that the current _Interface_ extends (directly or indirectly)
+- If no {ComplexTypeSpecifierType?} (or {SimpleTypeSpecifier}) exists for the current property in the current _Interface_ or any of the _Interface_s that the current \_Interface_ extends (directly or indirectly)
   - abort with an error
 
 ComplexTypeSpecifierType: `type:` SimpleTypeSpecifier
@@ -291,11 +291,11 @@ ComplexTypeSpecifierDescription: `description:` StringValue
 
 ComplexTypeSpecifierMinimumValue: `min:` NumberValue
 
-- Then the {NumberValue} represents the minimum valid *value* of the type specified by the {ComplexTypeSpecifier}. 
+- Then the {NumberValue} represents the minimum valid _value_ of the type specified by the {ComplexTypeSpecifier}.
 
 ComplexTypeSpecifierMaximumValue: `max:` NumberValue
 
-- Then the {NumberValue} represents the maximum valid *value* of the type specified by the {ComplexTypeSpecifier}.
+- Then the {NumberValue} represents the maximum valid _value_ of the type specified by the {ComplexTypeSpecifier}.
 
 ```yaml example
 interfaces:
