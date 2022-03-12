@@ -6,13 +6,15 @@
   "scripts": {
     "prepare": "node overrides/setup.js",
     "build": "spec-md ./src/index.md > ./docs/index.html",
-    "start": "nodemon --exec \"./node_modules/.bin/spec-md > docs/index.html\" ./src/index.md"
+    "start": "nodemon --exec \"./node_modules/.bin/spec-md > docs/index.html\" ./src/index.md",
+    "prettier": "prettier --write src overrides"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "nodemon": "^2.0.15",
+    "prettier": "^2.5.1",
     "shelljs": "^0.8.5",
     "spec-md": "^3.0.2"
   }

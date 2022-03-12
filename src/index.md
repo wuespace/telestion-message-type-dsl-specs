@@ -10,25 +10,26 @@ Please refer to the Specification for more information
 
 For this documentation, we use the following base types / terminology:
 
-:: A *string* is a text-based value.
+:: A _string_ is a text-based value.
 
-:: A *boolean* is a value that can either be {true} or {false}.
+:: A _boolean_ is a value that can either be {true} or {false}.
 
-:: A *number* is a value representing a numeric value.
+:: A _number_ is a value representing a numeric value.
 
-:: *null* is a value representing the explicit absence of a value.
+:: _null_ is a value representing the explicit absence of a value.
 
-:: An *object* is a value that maps a *string*-based key to a *value* for any number of unique keys.
+:: An _object_ is a value that maps a _string_-based key to a _value_ for any number of unique keys.
 
-:: An *array* is a value that contains a list where each item is a *value*.
+:: An _array_ is a value that contains a list where each item is a _value_.
 
-:: A *value* is either a *string*, a *boolean*, a *number*, *null*, an *object* or an *array*.
+:: A _value_ is either a _string_, a _boolean_, a _number_, _null_, an _object_ or an _array_.
 
 ### YAML Base Types
 
 A definition of the YAML expressions used within the DSL's syntax.
 
 BooleanValue: one of
+
 - `true`
 - `false`
 
@@ -38,11 +39,11 @@ NumberValue: "any YAML syntax representing a number value"
 
 ### Transpiler
 
-:: A *transpiler* generates code for a *target language* from the DSL defined in this document.
+:: A _transpiler_ generates code for a _target language_ from the DSL defined in this document.
 
 ### Target language
 
-:: A *target language* is a programming language for which you generate code representing the types defined with the DSL defined in this document.
+:: A _target language_ is a programming language for which you generate code representing the types defined with the DSL defined in this document.
 
 Every Telestion project can have an arbitrary number of *target language*s.
 
@@ -52,11 +53,11 @@ NOTE: The most common *target language*s for Telestion projects are Java and Typ
 
 ### Types folder
 
-:: The *Types folder* is a folder that contains type files. Its location is determined by the tooling used in the concrete Telestion Project.
+:: The _Types folder_ is a folder that contains type files. Its location is determined by the tooling used in the concrete Telestion Project.
 
 ### Type File
 
-:: A *Type File* is any file within the *Types folder* with the file extension `.types.yaml`. Its contents are defined by {TypeFileContent}.
+:: A _Type File_ is any file within the _Types folder_ with the file extension `.types.yaml`. Its contents are defined by {TypeFileContent}.
 
 TypeFileContent: InterfaceSpecifications MessagesSpecification PrimitiveSpecification?
 
@@ -64,125 +65,134 @@ TypeFileContent: InterfaceSpecifications MessagesSpecification PrimitiveSpecific
 
 ### Interfaces
 
-:: An *Interface* is a specification of an *object*'s structure.
+:: An _Interface_ is a specification of an _object_'s structure.
 
-Every *Interface* has an {InterfaceName}, a number of *Interface properties*, and optionally a set of *Interface modifiers*.
+Every _Interface_ has an {InterfaceName}, a number of _Interface properties_, and optionally a set of _Interface modifiers_.
 
 ```yaml example
 interfaces:
-    BaseMessage:
-        type: string
-    MyMessage:
-        type:
-            value: "my"
-        numbers: double[]
+  BaseMessage:
+    type: string
+  MyMessage:
+    type:
+      value: "my"
+    numbers: double[]
 ```
 
 InterfaceSpecifications: `interfaces:` InterfaceSpecification+
 
-* Let {InterfaceSpecifications} be the `interfaces` property (an *object*) of the *Type File*'s root *object*.
-* Then {InterfaceSpecification+} contains the definitions of the interfaces defined by the current *Type File*.
+- Let {InterfaceSpecifications} be the `interfaces` property (an _object_) of the _Type File_'s root _object_.
+- Then {InterfaceSpecification+} contains the definitions of the interfaces defined by the current _Type File_.
 
 InterfaceSpecification: InterfaceName `:` InterfaceDetails
-* Let {InterfaceSpecification} be a property of the {InterfaceSpecifications} *object*
-* Let {InterfaceName} be the key of the {InterfaceSpecifications} property
-* Let {InterfaceDetails} be the properties of an *object*.
+
+- Let {InterfaceSpecification} be a property of the {InterfaceSpecifications} _object_
+- Let {InterfaceName} be the key of the {InterfaceSpecifications} property
+- Let {InterfaceDetails} be the properties of an _object_.
 
 TODO Handling of duplicate interface names
 
-InterfaceName: /^[A-Z][a-zA-Z0-9]+$/
-* If any {InterfaceName} doesn't match the specified pattern
-    * show a warning. The pattern is supposed to enable maximum cross-language support.
+InterfaceName: /^[A-Z][a-za-z0-9]+$/
+
+- If any {InterfaceName} doesn't match the specified pattern
+  - show a warning. The pattern is supposed to enable maximum cross-language support.
 
 InterfaceDetails: InterfaceModifiers InterfaceProperties
 
 #### Interface modifiers
 
-:: *Interface modifiers* are essentially statements modifying how the *Interface*'s definition should be intrepreted.
+:: _Interface modifiers_ are essentially statements modifying how the _Interface_'s definition should be intrepreted.
 
-*Interface modifiers* allow to modify interfaces by
+_Interface modifiers_ allow to modify interfaces by
 
-- making them *abstract* (disallowing creation of instances of the *Interface*)
+- making them _abstract_ (disallowing creation of instances of the _Interface_)
 - adding a description to the interface
-- extending another *Interface* and inheriting its *Interface properties*
+- extending another _Interface_ and inheriting its _Interface properties_
 
 ```yaml example
 interfaces:
-    BaseInterface:
-        __abstract: true
+  BaseInterface:
+    __abstract: true
 
-    MyInterface:
-        __extends: BaseInterface
-        __description: "A nice little interface"
+  MyInterface:
+    __extends: BaseInterface
+    __description: "A nice little interface"
 ```
 
 InterfaceModifiers: AbstractModifier? ExtendsModifier? DescriptionModifier?
 
 AbstractModifier: `__abstract: ` BooleanValue
-* Let the {BooleanValue} represent whether the current interface is abstract (default: false)
-* If the {BooleanValue} is {true}
-    * forbid creation of an *object* of this *Interface*'s type, if possible within the *target language*
-    * forbid using this *Interface*'s {InterfaceName} in the {MessagesSpecification}
+
+- Let the {BooleanValue} represent whether the current interface is abstract (default: false)
+- If the {BooleanValue} is {true}
+  - forbid creation of an _object_ of this _Interface_'s type, if possible within the _target language_
+  - forbid using this _Interface_'s {InterfaceName} in the {MessagesSpecification}
 
 ExtendsModifier: `__extends: ` InterfaceName
-* Let {InterfaceName} be any defined *Interface*'s name.
-* If the current *Interface* declares any property whose {PropertyType} is incompatible with the {PropertyType} of any *Interface properties* with the same name {PropertyName} in the *Interface* {InterfaceName}
-    * abort with an error message
-* Then, the following statements are true for the current *Interface*:
-    * it contains all *Interface properties* from the *Interface* with the provided {InterfaceName}
-    * it contains all *Interface properties* declared by the current *Interface*
-    * for any *Interface properties* with the same {PropertyName}, the strictest type gets used.
-  
+
+- Let {InterfaceName} be any defined _Interface_'s name.
+- If the current _Interface_ declares any property whose {PropertyType} is incompatible with the {PropertyType} of any _Interface properties_ with the same name {PropertyName} in the _Interface_ {InterfaceName}
+  - abort with an error message
+- Then, the following statements are true for the current _Interface_:
+  - it contains all _Interface properties_ from the _Interface_ with the provided {InterfaceName}
+  - it contains all _Interface properties_ declared by the current _Interface_
+  - for any _Interface properties_ with the same {PropertyName}, the strictest type gets used.
+
 DescriptionModifier: `__description: ` StringValue
-* Let {StringValue} be any *string*
-* Then {StringValue} represents a text description of the current *Interface*
+
+- Let {StringValue} be any _string_
+- Then {StringValue} represents a text description of the current _Interface_
 
 #### Interface properties
 
-:: *Interface properties* are the properties of an *object* of the *Interface*'s type.
+:: _Interface properties_ are the properties of an _object_ of the _Interface_'s type.
 
 InterfaceProperties: Property+
-* Let {InterfaceProperties} be the collection of properties in an {InterfaceDetails} object where the keys don't correspond to any {InterfaceModifier}.
-* Then {Property+} represents all properties of any *object* of the *Interface*'s type.
+
+- Let {InterfaceProperties} be the collection of properties in an {InterfaceDetails} object where the keys don't correspond to any {InterfaceModifier}.
+- Then {Property+} represents all properties of any _object_ of the _Interface_'s type.
 
 Property: PropertyName `:` PropertyType
-* Any *object* of the *Interface*'s type must contain a property with the key {PropertyName} with a *value* of the type {PropertyType}.
+
+- Any _object_ of the _Interface_'s type must contain a property with the key {PropertyName} with a _value_ of the type {PropertyType}.
 
 TODO Handling of duplicate property names
 
-PropertyName: /^[a-z][a-z0-9]*$/
-* If any {PropertyName} doesn't match the specified pattern
-    * show a warning. The pattern is supposed to enable maximum cross-language support.
+PropertyName: /^[a-z][a-z0-9]\*$/
+
+- If any {PropertyName} doesn't match the specified pattern
+  - show a warning. The pattern is supposed to enable maximum cross-language support.
 
 PropertyType: TypeSpecifier
 
 ### Message types
 
 MessagesSpecification: InterfaceName+
-* Let {InterfaceName} be a property of the {InterfaceSpecifications} object with an *array* value.
-* If {InterfaceName} isn't specified in any {InterfaceSpecifications} in the type folder
-    * abort compilation with an error
-* Then every message must be of one of the types specified by the {InterfaceDetails} of the corresponding {InterfaceName}.
+
+- Let {InterfaceName} be a property of the {InterfaceSpecifications} object with an _array_ value.
+- If {InterfaceName} isn't specified in any {InterfaceSpecifications} in the type folder
+  - abort compilation with an error
+- Then every message must be of one of the types specified by the {InterfaceDetails} of the corresponding {InterfaceName}.
 
 ### Primitives
 
-:: A *Primitive* is a type that cannot be further specified within the DSL.
+:: A _Primitive_ is a type that cannot be further specified within the DSL.
 
-A *Primitive* is clearly defined by a unique {PrimitiveName}.
+A _Primitive_ is clearly defined by a unique {PrimitiveName}.
 
-Any *Primitive* must get mapped to a type in every *target language*.
+Any _Primitive_ must get mapped to a type in every _target language_.
 
-NOTE: A *Primitive* within the DSL needn't necessarily be a "primitive" in a _target language_. For example, you can define a `date` primitive that can get mapped to a `DateTime` instance in Java. In this case, you couldn't define how a `date` gets represented any better within the DSL (making it a *Primitive*), but it wouldn't be a "primitive" value in Java.
+NOTE: A _Primitive_ within the DSL needn't necessarily be a "primitive" in a _target language_. For example, you can define a `date` primitive that can get mapped to a `DateTime` instance in Java. In this case, you couldn't define how a `date` gets represented any better within the DSL (making it a _Primitive_), but it wouldn't be a "primitive" value in Java.
 
 ### Type specifiers
 
-:: A *Type Specifier* is a representation of a *value*'s type.
+:: A _Type Specifier_ is a representation of a _value_'s type.
 
 TypeSpecifier: one of SimpleTypeSpecifier ComplexTypeSpecifier
 
 #### Simple type specifier
 
-:: A *Simple type specifier* is a representation of a *value*'s type as a *string*.
+:: A _Simple type specifier_ is a representation of a _value_'s type as a _string_.
 
 ```example
 string[]
@@ -191,6 +201,7 @@ string[]
 ```
 
 SimpleTypeSpecifier: one of
+
 - ParenthesizedTypeSpecifier
 - ArrayTypeSpecifier
 - NullableTypeSpecifier
@@ -199,29 +210,35 @@ SimpleTypeSpecifier: one of
 - PrimitiveTypeSpecifier
 
 ParenthesizedTypeSpecifier: ( SimpleTypeSpecifier )
-* Then the resulting type is equivalent to the type specified by the {SimpleTypeSpecifier}
+
+- Then the resulting type is equivalent to the type specified by the {SimpleTypeSpecifier}
 
 ArrayTypeSpecifier: SimpleTypeSpecifier `[]`
-* Then the resulting type is an array whose values are of the type specified by the {SimpleTypeSpecifier}
+
+- Then the resulting type is an array whose values are of the type specified by the {SimpleTypeSpecifier}
 
 NullableTypeSpecifier: SimpleTypeSpecifier `?`
-* Then the resulting type can be the type specified by the {SimpleTypeSpecifier} or *null*.
+
+- Then the resulting type can be the type specified by the {SimpleTypeSpecifier} or _null_.
 
 UnionTypeSpecifier: SimpleTypeSpecifier | SimpleTypeSpecifier
-* Then the resulting type can be the type specified by either the first or the second {SimpleTypeSpecifier}.
+
+- Then the resulting type can be the type specified by either the first or the second {SimpleTypeSpecifier}.
 
 InterfaceTypeSpecifier: InterfaceName
-* If no *Interface* with the given {InterfaceName} is defined
-    * abort with an error.
-* Then the resulting type is an *object* with the structure specified by the {InterfaceDetails} of the *Interface* with the corresponding {InterfaceName}.
+
+- If no _Interface_ with the given {InterfaceName} is defined
+  - abort with an error.
+- Then the resulting type is an _object_ with the structure specified by the {InterfaceDetails} of the _Interface_ with the corresponding {InterfaceName}.
 
 PrimitiveTypeSpecifier: PrimitiveName
-* If no *Primitive* with the given {PrimitiveName} is defined
-    * abort with an error.
-* Then the resulting type is the target language's type defined by the *Primitive* with the given {PrimitiveName}.
+
+- If no _Primitive_ with the given {PrimitiveName} is defined
+  - abort with an error.
+- Then the resulting type is the target language's type defined by the _Primitive_ with the given {PrimitiveName}.
 
 #### Complex type specifier
 
-:: A *Complex type specifier* is an *object* representing a type that allows for specification of more details for that type than a *Simple type specifier*.
+:: A _Complex type specifier_ is an _object_ representing a type that allows for specification of more details for that type than a _Simple type specifier_.
 
 ComplexTypeSpecifier: "an object-based specification of a value's type that allows for a few more options"
