@@ -276,7 +276,7 @@ NOTE: We evaluated using the GraphQL syntax for compatibility, but found it to b
 
 ComplexTypeSpecifier: "an object consisting of" ComplexTypeSpecifierType? ComplexTypeSpecifierValue? ComplexTypeSpecifierMinimumValue? ComplexTypeSpecifierMaximumValue?
 
-- If no {ComplexTypeSpecifierType?} (or {SimpleTypeSpecifier}) exists for the current property in the current _Interface_ or any of the _Interface_s that the current \_Interface_ extends (directly or indirectly)
+- If no {ComplexTypeSpecifierType?} (or {SimpleTypeSpecifier}) exists for the current property in the current _Interface_ or any _Interface_ that the current _Interface_ extends (directly or indirectly)
   - abort with an error
 
 ComplexTypeSpecifierType: `type:` SimpleTypeSpecifier
