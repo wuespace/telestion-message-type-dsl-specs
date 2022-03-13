@@ -144,7 +144,7 @@ The most common <span class="spec-ref"><a href="#target-language" data-name="tar
 </ol>
 </div>
 <div class="spec-semantic" id="InterfaceName">
-<span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span><div class="spec-rhs"><span class="spec-rx">/^[A-Z][a-za-z0-9]+$/</span></div>
+<span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span><div class="spec-rhs"><span class="spec-constrained"><span class="spec-rx">/^[A-Z][a-zA-Z0-9]+$/</span><span class="spec-butnot"><span class="spec-t">Message</span></span></span></div>
 <ol>
 <li>If any <span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span> doesn&rsquo;t match the specified pattern<ol>
 <li>show a warning. The pattern is supposed to enable maximum cross-language support.</li>
@@ -299,7 +299,7 @@ A <span class="spec-ref"><a href="#primitive" data-name="primitive">Primitive</a
 </ol>
 </div>
 <div class="spec-production" id="TargetLanguageName">
-<span class="spec-nt"><a href="#TargetLanguageName" data-name="TargetLanguageName">TargetLanguageName</a></span><div class="spec-rhs"><span class="spec-rx">/^[a-z][a-za-z0-9]*$/</span></div>
+<span class="spec-nt"><a href="#TargetLanguageName" data-name="TargetLanguageName">TargetLanguageName</a></span><div class="spec-rhs"><span class="spec-rx">/^[a-z][a-zA-Z0-9]*$/</span></div>
 </div>
 <div id="note-9f992" class="spec-note">
 <a href="#note-9f992">Note</a>
@@ -343,21 +343,30 @@ While this specification doesn&rsquo;t define any required <span class="spec-ref
 <tr>
 <td class="spec-rhs"><span class="spec-nt"><a href="#ParenthesizedTypeSpecifier" data-name="ParenthesizedTypeSpecifier">ParenthesizedTypeSpecifier</a></span></td></tr>
 <tr>
+<td class="spec-rhs"><span class="spec-nt"><a href="#UnionTypeSpecifier" data-name="UnionTypeSpecifier">UnionTypeSpecifier</a></span></td></tr>
+<tr>
 <td class="spec-rhs"><span class="spec-nt"><a href="#ArrayTypeSpecifier" data-name="ArrayTypeSpecifier">ArrayTypeSpecifier</a></span></td></tr>
 <tr>
 <td class="spec-rhs"><span class="spec-nt"><a href="#NullableTypeSpecifier" data-name="NullableTypeSpecifier">NullableTypeSpecifier</a></span></td></tr>
-<tr>
-<td class="spec-rhs"><span class="spec-nt"><a href="#UnionTypeSpecifier" data-name="UnionTypeSpecifier">UnionTypeSpecifier</a></span></td></tr>
 <tr>
 <td class="spec-rhs"><span class="spec-nt"><a href="#InterfaceTypeSpecifier" data-name="InterfaceTypeSpecifier">InterfaceTypeSpecifier</a></span></td></tr>
 <tr>
 <td class="spec-rhs"><span class="spec-nt"><a href="#PrimitiveTypeSpecifier" data-name="PrimitiveTypeSpecifier">PrimitiveTypeSpecifier</a></span></td></tr>
 </table></div></div>
 </div>
+<div id="note-d64d2" class="spec-note">
+<a href="#note-d64d2">Note</a>
+When parsing a <span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span>, the types of <span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span> take precedence in the order declared above. I.e., <span class="spec-nt"><a href="#ParenthesizedTypeSpecifier" data-name="ParenthesizedTypeSpecifier">ParenthesizedTypeSpecifier</a></span> takes precedence over <span class="spec-nt"><a href="#UnionTypeSpecifier" data-name="UnionTypeSpecifier">UnionTypeSpecifier</a></span> which takes precedence over <span class="spec-nt"><a href="#ArrayTypeSpecifier" data-name="ArrayTypeSpecifier">ArrayTypeSpecifier</a></span>, and so on. Use the first one that matches.</div>
 <div class="spec-semantic" id="ParenthesizedTypeSpecifier">
 <span class="spec-nt"><a href="#ParenthesizedTypeSpecifier" data-name="ParenthesizedTypeSpecifier">ParenthesizedTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-t">(</span><span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span><span class="spec-t">)</span></div>
 <ol>
 <li>Then the resulting type is equivalent to the type specified by the <span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span></li>
+</ol>
+</div>
+<div class="spec-semantic" id="UnionTypeSpecifier">
+<span class="spec-nt"><a href="#UnionTypeSpecifier" data-name="UnionTypeSpecifier">UnionTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span><span class="spec-t">|</span><span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span></div>
+<ol>
+<li>Then the resulting type can be the type specified by either the first or the second <span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span>.</li>
 </ol>
 </div>
 <div class="spec-semantic" id="ArrayTypeSpecifier">
@@ -370,12 +379,6 @@ While this specification doesn&rsquo;t define any required <span class="spec-ref
 <span class="spec-nt"><a href="#NullableTypeSpecifier" data-name="NullableTypeSpecifier">NullableTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span><span class="spec-t">?</span></div>
 <ol>
 <li>Then the resulting type can be the type specified by the <span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span> or <span class="spec-ref"><a href="#null" data-name="null">null</a></span>.</li>
-</ol>
-</div>
-<div class="spec-semantic" id="UnionTypeSpecifier">
-<span class="spec-nt"><a href="#UnionTypeSpecifier" data-name="UnionTypeSpecifier">UnionTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span><span class="spec-t">|</span><span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span></div>
-<ol>
-<li>Then the resulting type can be the type specified by either the first or the second <span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span>.</li>
 </ol>
 </div>
 <div class="spec-semantic" id="InterfaceTypeSpecifier">
