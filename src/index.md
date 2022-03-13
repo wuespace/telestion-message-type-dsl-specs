@@ -98,7 +98,7 @@ InterfaceSpecification: InterfaceName `:` InterfaceDetails
 - Let {InterfaceName} be the key of the {InterfaceSpecifications} property
 - Let {InterfaceDetails} be the properties of an _object_.
 
-InterfaceName: /^[A-Z][a-za-z0-9]+$/
+InterfaceName: /^[A-Z][a-zA-Z0-9]+$/
 
 - If any {InterfaceName} doesn't match the specified pattern
   - show a warning. The pattern is supposed to enable maximum cross-language support.
@@ -225,7 +225,7 @@ PrimitiveLanguageMapEntry: TargetLanguageName `:` StringValue
 - Let {TargetLanguageName} be an identifier of a _Target language_.
 - Then {StringValue} contains the current {Primitive}'s type in that _Target language_. It is up to the _Transpiler_ to interpret that value and specify what it needs.
 
-TargetLanguageName: /^[a-z][a-za-z0-9]\*$/
+TargetLanguageName: /^[a-z][a-zA-Z0-9]\*$/
 
 NOTE: While this specification doesn't define any required _Target language_ (this depends on the individual project and the _Transpiler_ it uses), the most commonly used {TargetLanguageName} values are `java`, `json`, and `typescript`.
 
