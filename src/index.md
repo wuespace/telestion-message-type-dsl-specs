@@ -98,7 +98,7 @@ InterfaceSpecification: InterfaceName `:` InterfaceDetails
 - Let {InterfaceName} be the key of the {InterfaceSpecifications} property
 - Let {InterfaceDetails} be the properties of an _object_.
 
-InterfaceName: /^[A-Z][a-zA-Z0-9]+$/
+InterfaceName: /^[A-Z][a-zA-Z0-9]+$/ but not `Message`
 
 - If any {InterfaceName} doesn't match the specified pattern
   - show a warning. The pattern is supposed to enable maximum cross-language support.
@@ -266,15 +266,24 @@ SimpleTypeSpecifier: StringValue "consisting of" SimpleTypeSpecifierNode
 SimpleTypeSpecifierNode: one of
 
 - ParenthesizedTypeSpecifier
+- UnionTypeSpecifier
 - ArrayTypeSpecifier
 - NullableTypeSpecifier
-- UnionTypeSpecifier
 - InterfaceTypeSpecifier
 - PrimitiveTypeSpecifier
+
+NOTE: When parsing a {SimpleTypeSpecifierNode}, the types of {SimpleTypeSpecifierNode} take precedence in the order declared above.
+I.e., {ParenthesizedTypeSpecifier} takes precedence over {UnionTypeSpecifier} which takes precedence over {ArrayTypeSpecifier},
+and so on.
+Use the first one that matches.
 
 ParenthesizedTypeSpecifier: ( SimpleTypeSpecifierNode )
 
 - Then the resulting type is equivalent to the type specified by the {SimpleTypeSpecifierNode}
+
+UnionTypeSpecifier: SimpleTypeSpecifierNode | SimpleTypeSpecifierNode
+
+- Then the resulting type can be the type specified by either the first or the second {SimpleTypeSpecifierNode}.
 
 ArrayTypeSpecifier: SimpleTypeSpecifierNode `[]`
 
@@ -283,10 +292,6 @@ ArrayTypeSpecifier: SimpleTypeSpecifierNode `[]`
 NullableTypeSpecifier: SimpleTypeSpecifierNode `?`
 
 - Then the resulting type can be the type specified by the {SimpleTypeSpecifierNode} or _null_.
-
-UnionTypeSpecifier: SimpleTypeSpecifierNode | SimpleTypeSpecifierNode
-
-- Then the resulting type can be the type specified by either the first or the second {SimpleTypeSpecifierNode}.
 
 InterfaceTypeSpecifier: InterfaceName
 
