@@ -355,3 +355,19 @@ interfaces:
 
         I can use `Markdown` here.
 ```
+
+## A. About this specification
+
+### Authors
+
+Thanks to everyone who contributed to this specification:
+
+<a href="https://github.com/wuespace/telestion-message-type-dsl-specs/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=wuespace/telestion-message-type-dsl-specs" />
+</a>
+
+### Generated with / special thanks to
+
+This specification website was generated using _Spec Markdown_.
+
+[Learn more about Spec Markdown](https://spec-md.com/)
