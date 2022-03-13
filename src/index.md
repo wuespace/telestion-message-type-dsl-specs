@@ -293,9 +293,15 @@ ArrayTypeSpecifier: SimpleTypeSpecifierNode `[]`
 
 - Then the resulting type is an array whose values are of the type specified by the {SimpleTypeSpecifierNode}
 
+NOTE: As the {UnionTypeSpecifier} takes precedence, the {SimpleTypeSpecifierNode} in an {ArrayTypeSpecifier} can't be a
+{UnionTypeSpecifier}.
+
 NullableTypeSpecifier: SimpleTypeSpecifierNode `?`
 
 - Then the resulting type can be the type specified by the {SimpleTypeSpecifierNode} or _null_.
+
+NOTE: As the {UnionTypeSpecifier} takes precedence, the {SimpleTypeSpecifierNode} in a {NullableTypeSpecifier} can't be a 
+{UnionTypeSpecifier}.
 
 InterfaceTypeSpecifier: InterfaceName
 
