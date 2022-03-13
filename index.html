@@ -380,12 +380,18 @@ When parsing a <span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-nam
 <li>Then the resulting type is an array whose values are of the type specified by the <span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span></li>
 </ol>
 </div>
+<div id="note-4c75b" class="spec-note">
+<a href="#note-4c75b">Note</a>
+As the <span class="spec-nt"><a href="#UnionTypeSpecifier" data-name="UnionTypeSpecifier">UnionTypeSpecifier</a></span> takes precedence, the <span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span> in an <span class="spec-nt"><a href="#ArrayTypeSpecifier" data-name="ArrayTypeSpecifier">ArrayTypeSpecifier</a></span> can&rsquo;t be a <span class="spec-nt"><a href="#UnionTypeSpecifier" data-name="UnionTypeSpecifier">UnionTypeSpecifier</a></span>.</div>
 <div class="spec-semantic" id="NullableTypeSpecifier">
 <span class="spec-nt"><a href="#NullableTypeSpecifier" data-name="NullableTypeSpecifier">NullableTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span><span class="spec-t">?</span></div>
 <ol>
 <li>Then the resulting type can be the type specified by the <span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span> or <span class="spec-ref"><a href="#null" data-name="null">null</a></span>.</li>
 </ol>
 </div>
+<div id="note-75130" class="spec-note">
+<a href="#note-75130">Note</a>
+As the <span class="spec-nt"><a href="#UnionTypeSpecifier" data-name="UnionTypeSpecifier">UnionTypeSpecifier</a></span> takes precedence, the <span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span> in a <span class="spec-nt"><a href="#NullableTypeSpecifier" data-name="NullableTypeSpecifier">NullableTypeSpecifier</a></span> can&rsquo;t be a <span class="spec-nt"><a href="#UnionTypeSpecifier" data-name="UnionTypeSpecifier">UnionTypeSpecifier</a></span>.</div>
 <div class="spec-semantic" id="InterfaceTypeSpecifier">
 <span class="spec-nt"><a href="#InterfaceTypeSpecifier" data-name="InterfaceTypeSpecifier">InterfaceTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#InterfaceName" data-name="InterfaceName">InterfaceName</a></span></div>
 <ol>
