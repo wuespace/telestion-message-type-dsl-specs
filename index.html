@@ -335,8 +335,13 @@ While this specification doesn&rsquo;t define any required <span class="spec-ref
 (string | number)[]?
 (string[] | number | MyInterface?[])[]
 </code></pre>
-<div class="spec-production" id="SimpleTypeSpecifier">
+<div class="spec-semantic" id="SimpleTypeSpecifier">
 <span class="spec-nt"><a href="#SimpleTypeSpecifier" data-name="SimpleTypeSpecifier">SimpleTypeSpecifier</a></span><div class="spec-rhs"><span class="spec-nt"><a href="#StringValue" data-name="StringValue">StringValue</a></span><span class="spec-prose">consisting of</span><span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span></div>
+<ol>
+<li>Let <var data-name="raw">raw</var> be equal to the <span class="spec-nt"><a href="#StringValue" data-name="StringValue">StringValue</a></span>&lsquo;s <span class="spec-ref"><a href="#string" data-name="string">string</a></span> value.</li>
+<li>Let <var data-name="specifier">specifier</var> be <var data-name="raw">raw</var> with all whitespaces removed.</li>
+<li>Then <var data-name="specifier">specifier</var> is a <span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span>.</li>
+</ol>
 </div>
 <div class="spec-production" id="SimpleTypeSpecifierNode">
 <span class="spec-nt"><a href="#SimpleTypeSpecifierNode" data-name="SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></span><div class="spec-oneof"><div class="spec-oneof-grid"><table>
@@ -480,7 +485,6 @@ We evaluated using the GraphQL syntax for compatibility, but found it to be inco
 <li><a href="#PrimitiveSpecification">PrimitiveSpecification</a></li>
 <li><a href="#PropertyType">PropertyType</a></li>
 <li><a href="#simple-type-specifier">Simple type specifier</a></li>
-<li><a href="#SimpleTypeSpecifier">SimpleTypeSpecifier</a></li>
 <li><a href="#SimpleTypeSpecifierNode">SimpleTypeSpecifierNode</a></li>
 <li><a href="#string">string</a></li>
 <li><a href="#StringValue">StringValue</a></li>
