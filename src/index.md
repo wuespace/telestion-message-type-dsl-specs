@@ -263,6 +263,10 @@ string[]
 
 SimpleTypeSpecifier: StringValue "consisting of" SimpleTypeSpecifierNode
 
+- Let {raw} be equal to the {StringValue}'s _string_ value.
+- Let {specifier} be {raw} with all whitespaces removed.
+- Then {specifier} is a {SimpleTypeSpecifierNode}.
+
 SimpleTypeSpecifierNode: one of
 
 - ParenthesizedTypeSpecifier
