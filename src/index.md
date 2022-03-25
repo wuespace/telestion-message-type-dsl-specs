@@ -261,6 +261,10 @@ string[]
 (string[] | number | MyInterface?[])[]
 ```
 
+NOTE: To make it easier to work with the string-based {SimpleTypeSpecifier},
+we provide an [ANTLR 4](https://www.antlr.org/) grammar to generate parsers for the {SimpleTypeSpecifierNode}:
+[Download the ANTLR 4 grammar file](SimpleTypeSpecifier.g4)
+
 SimpleTypeSpecifier: StringValue "consisting of" SimpleTypeSpecifierNode
 
 - Let {raw} be equal to the {StringValue}'s _string_ value.
