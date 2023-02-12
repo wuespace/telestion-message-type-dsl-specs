@@ -7,7 +7,7 @@
     "prettier": "prettier --write src overrides .github"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15",
+    "nodemon": "^2.0.20",
     "shelljs": "^0.8.5",
     "spec-md": "^3.0.2"
   },
